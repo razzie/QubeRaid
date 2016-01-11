@@ -1,0 +1,5 @@
+bin/quberaid*
+obj
+.vs
+quberaid.sdf
+quberaid.opensdf
