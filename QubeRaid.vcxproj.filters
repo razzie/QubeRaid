@@ -636,6 +636,9 @@
     <ClInclude Include="src\tasks\maintask.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\nodes\groundnode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -657,6 +660,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tasks\maintask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nodes\groundnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

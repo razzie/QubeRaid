@@ -12,6 +12,7 @@
 #include "utils/eventreceiver.hpp"
 #include "tasks/maintask.hpp"
 #include "tasks/cameracontroller.hpp"
+#include "nodes/groundnode.hpp"
 
 using namespace irr;
 
@@ -25,7 +26,7 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	//params.DriverType = video::EDT_DIRECT3D9;
 	params.DriverType = video::EDT_OPENGL;
 	params.Fullscreen = false;
-	params.WindowSize = core::dimension2du(800, 600);
+	params.WindowSize = core::dimension2du(1280, 800);
 	params.WithAlphaChannel = true;
 	params.Vsync = true;
 
@@ -40,7 +41,8 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 
 	m_cam = m_smgr->addCameraSceneNode(0, core::vector3df(0.f, 10.f, -10.f), core::vector3df(0.f, 0.f, 0.f));
 	//m_smgr->addLightSceneNode(0, { 0.f, 30.f, 30.f }, { 255, 255, 255, 255 }, 0.5f);
-	m_smgr->addCubeSceneNode();
+	//m_smgr->addCubeSceneNode();
+	GroundNode* ground = new GroundNode(this);
 }
 
 QubeRaid::QubeRaid()

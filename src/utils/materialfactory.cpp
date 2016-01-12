@@ -31,13 +31,13 @@ MaterialFactory::MaterialFactory(QubeRaid* app) :
 		shader_cb);
 	m_flat_mat.MaterialType = (irr::video::E_MATERIAL_TYPE)mat_type;
 
-	// initialize surface material
+	// initialize ground material
 	shader_cb = new ShaderCallback(m_app->getSceneManager());
 	mat_type = gpu->addHighLevelShaderMaterialFromFiles(
-		"../assets/shaders/surface.vert", "main", irr::video::EVST_VS_1_1,
-		"../assets/shaders/surface.frag", "main", irr::video::EPST_PS_1_1,
+		"../assets/shaders/ground.vert", "main", irr::video::EVST_VS_1_1,
+		"../assets/shaders/ground.frag", "main", irr::video::EPST_PS_1_1,
 		shader_cb);
-	m_surface_mat.MaterialType = (irr::video::E_MATERIAL_TYPE)mat_type;
+	m_ground_mat.MaterialType = (irr::video::E_MATERIAL_TYPE)mat_type;
 }
 
 MaterialFactory::~MaterialFactory()
@@ -49,7 +49,12 @@ const irr::video::SMaterial& MaterialFactory::getLineMaterial()
 	return m_line_mat;
 }
 
-const irr::video::SMaterial& MaterialFactory::getSurfaceMaterial()
+const irr::video::SMaterial& MaterialFactory::getFlatShadedMaterial()
 {
-	return m_surface_mat;
+	return m_flat_mat;
+}
+
+const irr::video::SMaterial& MaterialFactory::getGroundMaterial()
+{
+	return m_ground_mat;
 }

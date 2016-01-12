@@ -1,8 +1,18 @@
+/**
+ * Copyright (c) 2016 Gábor Görzsöny (www.gorzsony.com)
+ *
+ * This source is a private work and can be used only with the
+ * written permission of the author. Do not redistribute it!
+ * All rights reserved.
+ */
+
+uniform vec3 camera_pos;
 uniform vec3 light_pos;
 uniform vec4 light_color;
 varying vec3 pos;
 varying vec3 norm;
 
+/*
 float rand2(vec3 n)
 {
     return fract(sin(dot(n.xyz, vec3(10, 300, 400)))* 43758.5453);
@@ -47,28 +57,16 @@ float rand(vec3 n, float dist)
 
     return 3. * ((c * 0.5) + 0.5);
 }
+*/
 
 void main(void)
 {
 	vec3 normal = normalize(norm);
 	vec3 flat_normal = normalize(cross(dFdy(pos), dFdx(pos)));
-	vec3 light_normal = normalize(light_pos);
+	vec3 light_normal = normalize(camera_pos);
 
-	vec4 surface_color = vec4(0.35, 0.45, 0.25, 0.0);
-	vec4 ground_color = vec4(0.5, 0.5, 0.375, 0.0);
+	vec4 color = vec4(0.5, 0.5, 0.375, 0.0);
 	vec4 light = clamp(light_color * dot(light_normal, normal), 0.0, 1.0);
 
-	float noise = rand(pos, 1.0);
-
-	if (flat_normal.y > 0.5)
-		gl_FragColor = ((light * 0.25) + 0.75);
-	else
-		gl_FragColor = 0.25 * light * light;
-
-	/*if (flat_normal.y > 0.5)
-		gl_FragColor = surface_color * noise * ((light * 0.25) + 0.75);
-	else if (flat_normal.y < -0.5)
-		gl_FragColor = ground_color * (rand(pos * 0.1, 1.0) + noise) * 0.5 * 0.125 * light;
-	else
-		gl_FragColor = ground_color * (rand(pos * 0.1, 1.0) + noise) * 0.5 * 0.25 * light;*/
+	gl_FragColor = light;
 }

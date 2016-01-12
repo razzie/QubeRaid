@@ -18,12 +18,12 @@ public:
 	MaterialFactory(QubeRaid*);
 	~MaterialFactory();
 	const irr::video::SMaterial& getLineMaterial();
-	//const irr::video::SMaterial& getFlatShadedMaterial();
-	const irr::video::SMaterial& getSurfaceMaterial();
+	const irr::video::SMaterial& getFlatShadedMaterial();
+	const irr::video::SMaterial& getGroundMaterial();
 
 private:
 	QubeRaid* m_app;
 	irr::video::SMaterial m_line_mat;
 	irr::video::SMaterial m_flat_mat;
-	irr::video::SMaterial m_surface_mat;
+	irr::video::SMaterial m_ground_mat;
 };
