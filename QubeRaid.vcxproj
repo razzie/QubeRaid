@@ -326,9 +326,10 @@
     <ClInclude Include="src\3rd\irrlicht\vector2d.h" />
     <ClInclude Include="src\3rd\irrlicht\vector3d.h" />
     <ClInclude Include="src\events.hpp" />
+    <ClInclude Include="src\inputs.hpp" />
     <ClInclude Include="src\nodes\groundnode.hpp" />
     <ClInclude Include="src\tasks\maintask.hpp" />
-    <ClInclude Include="src\utils\eventreceiver.hpp" />
+    <ClInclude Include="src\utils\inputmanager.hpp" />
     <ClInclude Include="src\utils\grid.hpp" />
     <ClInclude Include="src\utils\materialfactory.hpp" />
     <ClInclude Include="src\tasks\cameracontroller.hpp" />
@@ -342,7 +343,7 @@
     <ClCompile Include="src\nodes\groundnode.cpp" />
     <ClCompile Include="src\quberaid.cpp" />
     <ClCompile Include="src\tasks\maintask.cpp" />
-    <ClCompile Include="src\utils\eventreceiver.cpp" />
+    <ClCompile Include="src\utils\inputmanager.cpp" />
     <ClCompile Include="src\utils\materialfactory.cpp" />
     <ClCompile Include="src\tasks\cameracontroller.cpp" />
   </ItemGroup>

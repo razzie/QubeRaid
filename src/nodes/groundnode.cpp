@@ -178,7 +178,7 @@ void GroundNode::addCube(core::vector3di pos, core::vector3di size)
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<f32> dis(-0.1, 0.1);
+	std::uniform_real_distribution<f32> dis(-0.1f, 0.1f);
 
 	// pushing vertices to vertex buffer
 	for (int i = 0; i < 8; ++i)

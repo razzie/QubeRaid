@@ -34,6 +34,7 @@ std::shared_ptr<T> makeIrrPtr(T* p)
 	return std::shared_ptr<T>(p, [](T* p) { p->drop(); });
 }
 
+class InputManager;
 class MaterialFactory;
 
 class QubeRaid
@@ -53,6 +54,7 @@ public:
 	irr::video::IVideoDriver* getDriver();
 	irr::scene::ISceneManager* getSceneManager();
 	irr::scene::ICameraSceneNode* getCamera();
+	InputManager* getInputManager();
 	MaterialFactory* getMaterialFactory();
 
 private:
@@ -61,5 +63,6 @@ private:
 	irr::video::IVideoDriver* m_driver;
 	irr::scene::ISceneManager* m_smgr;
 	irr::scene::ICameraSceneNode* m_cam;
+	InputManager* m_inputmgr;
 	MaterialFactory* m_matfactory;
 };

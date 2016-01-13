@@ -8,8 +8,8 @@
 
 #include <irrlicht.h>
 #include "quberaid.hpp"
+#include "utils/inputmanager.hpp"
 #include "utils/materialfactory.hpp"
-#include "utils/eventreceiver.hpp"
 #include "tasks/maintask.hpp"
 #include "tasks/cameracontroller.hpp"
 #include "nodes/groundnode.hpp"
@@ -33,9 +33,10 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_device = createDeviceEx(params);
 	m_driver = m_device->getVideoDriver();
 	m_smgr = m_device->getSceneManager();
+	m_inputmgr = new InputManager(this);
 	m_matfactory = new MaterialFactory(this);
 
-	m_device->setEventReceiver(new EventReceiver(this));
+	m_device->setEventReceiver(m_inputmgr);
 	m_device->setResizable(true);
 	m_device->setWindowCaption(L"QubeRaid");
 
