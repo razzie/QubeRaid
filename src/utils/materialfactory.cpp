@@ -10,51 +10,67 @@
 #include "utils/materialfactory.hpp"
 #include "quberaid.hpp"
 
+using namespace irr;
+
 
 MaterialFactory::MaterialFactory(QubeRaid* app) :
 	m_app(app)
 {
-	irr::video::IGPUProgrammingServices* gpu = m_app->getSceneManager()->getVideoDriver()->getGPUProgrammingServices();
-	ShaderCallback* shader_cb;
-	irr::s32 mat_type;
+	scene::ISceneManager* smgr = m_app->getSceneManager();
+	video::IGPUProgrammingServices* gpu = smgr->getVideoDriver()->getGPUProgrammingServices();
+	ShaderCallback* shader_cb = new ShaderCallback(smgr);
+	s32 mat_type;
 
 	// initialize line material
-	m_line_mat.ZBuffer = false;
-	m_line_mat.Lighting = false;
-	m_line_mat.Thickness = 2.f;
+	m_line.ZBuffer = false;
+	m_line.Lighting = false;
+	m_line.Thickness = 2.f;
+
+	// initialize outline material
+	mat_type = gpu->addHighLevelShaderMaterialFromFiles(
+		"../assets/shaders/outline.vert", "main", video::EVST_VS_1_1,
+		"../assets/shaders/outline.frag", "main", video::EPST_PS_1_1,
+		shader_cb);
+	m_outline.MaterialType = (video::E_MATERIAL_TYPE)mat_type;
+	m_outline.FrontfaceCulling = true;
+	m_outline.BackfaceCulling = false;
+	m_outline.ZBuffer = video::ECFN_NEVER;
 
 	// initialize flat shaded material
-	shader_cb = new ShaderCallback(m_app->getSceneManager());
 	mat_type = gpu->addHighLevelShaderMaterialFromFiles(
-		"../assets/shaders/flat.vert", "main", irr::video::EVST_VS_1_1,
-		"../assets/shaders/flat.frag", "main", irr::video::EPST_PS_1_1,
+		"../assets/shaders/flat.vert", "main", video::EVST_VS_1_1,
+		"../assets/shaders/flat.frag", "main", video::EPST_PS_1_1,
 		shader_cb);
-	m_flat_mat.MaterialType = (irr::video::E_MATERIAL_TYPE)mat_type;
+	m_flat.MaterialType = (video::E_MATERIAL_TYPE)mat_type;
 
 	// initialize ground material
-	shader_cb = new ShaderCallback(m_app->getSceneManager());
 	mat_type = gpu->addHighLevelShaderMaterialFromFiles(
-		"../assets/shaders/ground.vert", "main", irr::video::EVST_VS_1_1,
-		"../assets/shaders/ground.frag", "main", irr::video::EPST_PS_1_1,
+		"../assets/shaders/ground.vert", "main", video::EVST_VS_1_1,
+		"../assets/shaders/ground.frag", "main", video::EPST_PS_1_1,
 		shader_cb);
-	m_ground_mat.MaterialType = (irr::video::E_MATERIAL_TYPE)mat_type;
+	m_ground.MaterialType = (video::E_MATERIAL_TYPE)mat_type;
 }
 
 MaterialFactory::~MaterialFactory()
 {
 }
 
-const irr::video::SMaterial& MaterialFactory::getLineMaterial()
+const video::SMaterial& MaterialFactory::getLineMaterial()
 {
-	return m_line_mat;
+	return m_line;
 }
 
-const irr::video::SMaterial& MaterialFactory::getFlatShadedMaterial()
+const video::SMaterial& MaterialFactory::getOutlineMaterial()
 {
-	return m_flat_mat;
+	return m_outline;
 }
 
-const irr::video::SMaterial& MaterialFactory::getGroundMaterial()
+const video::SMaterial& MaterialFactory::getFlatShadedMaterial()
 {
-	return m_ground_mat;
+	return m_flat;
+}
+
+const video::SMaterial& MaterialFactory::getGroundMaterial()
+{
+	return m_ground;
 }

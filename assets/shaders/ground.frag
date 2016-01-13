@@ -62,11 +62,11 @@ float rand(vec3 n, float dist)
 void main(void)
 {
 	vec3 normal = normalize(norm);
-	vec3 flat_normal = normalize(cross(dFdy(pos), dFdx(pos)));
+	//vec3 flat_normal = normalize(cross(dFdy(pos), dFdx(pos)));
 	vec3 light_normal = normalize(camera_pos);
 
-	vec4 color = vec4(0.5, 0.5, 0.375, 0.0);
+	//vec4 color = vec4(0.5, 0.5, 0.375, 0.0);
 	vec4 light = clamp(light_color * dot(light_normal, normal), 0.0, 1.0);
 
-	gl_FragColor = light;
+	gl_FragColor = (light * 0.5);
 }

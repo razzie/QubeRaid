@@ -329,6 +329,7 @@
     <ClInclude Include="src\nodes\groundnode.hpp" />
     <ClInclude Include="src\tasks\maintask.hpp" />
     <ClInclude Include="src\utils\eventreceiver.hpp" />
+    <ClInclude Include="src\utils\grid.hpp" />
     <ClInclude Include="src\utils\materialfactory.hpp" />
     <ClInclude Include="src\tasks\cameracontroller.hpp" />
     <ClInclude Include="src\utils\perlin.hpp" />
