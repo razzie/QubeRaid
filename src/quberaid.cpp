@@ -12,8 +12,8 @@
 #include "utils/materialfactory.hpp"
 #include "utils/meshfactory.hpp"
 #include "tasks/maintask.hpp"
+#include "tasks/leveltask.hpp"
 #include "tasks/cameracontroller.hpp"
-#include "nodes/groundnode.hpp"
 
 using namespace irr;
 
@@ -45,10 +45,6 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_cam = m_smgr->addCameraSceneNode(0, core::vector3df(0.f, 10.f, -10.f), core::vector3df(0.f, 0.f, 0.f));
 	//m_smgr->addLightSceneNode(0, { 0.f, 30.f, 30.f }, { 255, 255, 255, 255 }, 0.5f);
 	//m_smgr->addCubeSceneNode();
-
-	GroundNode* ground = new GroundNode(this);
-	ground->drop();
-	ground = nullptr;
 }
 
 QubeRaid::QubeRaid()
@@ -63,6 +59,7 @@ int QubeRaid::run()
 {
 	m_thread->setState(State::GAME);
 	m_thread->addTask<MainTask, State::GAME>(this);
+	m_thread->addTask<LevelTask, State::GAME>(this);
 	m_thread->addTask<CameraController, State::GAME>(this);
 	return m_thread->run(gg::IThread::Mode::LOCAL);
 }

@@ -8,27 +8,19 @@
 
 #pragma once
 
+#include <vector>
+#include <utility> // std::pair
 #include <irrlicht.h>
+#include "nodes/nodebase.hpp"
 
 class QubeRaid;
 
-class GroundNode : public irr::scene::ISceneNode
+class GroundNode : public NodeBase
 {
 public:
-	GroundNode(QubeRaid*);
+	GroundNode(QubeRaid*, const std::vector<std::pair<irr::core::vector3di, irr::core::vector3di>>& blocks);
 	virtual ~GroundNode();
-	virtual void OnRegisterSceneNode();
-	virtual void render();
-	virtual const irr::core::aabbox3d<irr::f32>& getBoundingBox() const;
-	virtual irr::u32 getMaterialCount() const;
-	virtual irr::video::SMaterial& getMaterial(irr::u32 i);
 
 private:
-	QubeRaid* m_app;
-	irr::video::SMaterial m_material;
-	irr::scene::CVertexBuffer m_vertices;
-	irr::scene::CIndexBuffer m_indices;
-	irr::scene::CDynamicMeshBuffer m_meshbuffer;
-
 	void addBlock(irr::core::vector3di pos, irr::core::vector3di size = { 1,1,1 });
 };

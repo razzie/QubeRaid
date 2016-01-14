@@ -331,6 +331,8 @@
     <ClInclude Include="src\meshes\imesh.hpp" />
     <ClInclude Include="src\meshes\roundedcubemesh.hpp" />
     <ClInclude Include="src\nodes\groundnode.hpp" />
+    <ClInclude Include="src\nodes\nodebase.hpp" />
+    <ClInclude Include="src\tasks\leveltask.hpp" />
     <ClInclude Include="src\tasks\maintask.hpp" />
     <ClInclude Include="src\utils\inputmanager.hpp" />
     <ClInclude Include="src\utils\grid.hpp" />
@@ -345,7 +347,9 @@
     <ClCompile Include="src\events.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\nodes\groundnode.cpp" />
+    <ClCompile Include="src\nodes\nodebase.cpp" />
     <ClCompile Include="src\quberaid.cpp" />
+    <ClCompile Include="src\tasks\leveltask.cpp" />
     <ClCompile Include="src\tasks\maintask.cpp" />
     <ClCompile Include="src\utils\inputmanager.cpp" />
     <ClCompile Include="src\utils\materialfactory.cpp" />
