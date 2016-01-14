@@ -1,5 +1,6 @@
-bin/quberaid*
+bin/QubeRaid*
 obj
 .vs
-quberaid.sdf
-quberaid.opensdf
+QubeRaid.sdf
+QubeRaid.opensdf
+QubeRaid.VC.opendb
