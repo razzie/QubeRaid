@@ -30,8 +30,13 @@ public:
 
 private:
 	QubeRaid* m_app;
+	unsigned m_level_radius;
+	unsigned m_base_count;
+	std::vector<irr::core::vector3df> m_base_positions;
 	GroundNode* m_ground;
 	std::vector<std::pair<irr::core::vector3di, irr::core::vector3di>> m_ground_blocks;
 
-	void generateGroundBlocks(unsigned bases = 0);
+	void generateBasePositions();
+	void generateGroundBlocks(unsigned seed);
+	float getClosestBaseDistance(irr::core::vector3df pos) const;
 };

@@ -6,6 +6,7 @@
  * All rights reserved.
  */
 
+#include <cmath>
 #include <gg/logger.hpp>
 #include "quberaid.hpp"
 #include "events.hpp"
@@ -21,7 +22,12 @@ using namespace irr;
 LevelTask::LevelTask(QubeRaid* app) :
 	m_app(app)
 {
-	generateGroundBlocks();
+	m_level_radius = 20;
+	m_base_count = 5;
+
+	generateBasePositions();
+	generateGroundBlocks(4444);
+
 	m_ground = new GroundNode(m_app, m_ground_blocks);
 }
 
@@ -74,7 +80,22 @@ void LevelTask::onFinish(gg::ITaskOptions& options)
 {
 }
 
-void LevelTask::generateGroundBlocks(unsigned bases)
+void LevelTask::generateBasePositions()
+{
+	float base_angle = 360.f / m_base_count;
+	core::vector3df center((f32)m_level_radius, 0.f, (f32)m_level_radius);
+
+	m_base_positions.push_back(center);
+
+	for (unsigned i = 0; i < m_base_count; ++i)
+	{
+		core::vector3df base(std::sin(core::degToRad(base_angle * i)), 0.f, std::cos(core::degToRad(base_angle * i)));
+		base *= (0.5f * m_level_radius);
+		m_base_positions.push_back(center + base);
+	}
+}
+
+void LevelTask::generateGroundBlocks(unsigned seed)
 {
 	struct GridData
 	{
@@ -82,13 +103,14 @@ void LevelTask::generateGroundBlocks(unsigned bases)
 		volatile unsigned char used : 1;
 	};
 
-	core::vector3di size(10, 2, 10);
+	core::vector3di size(m_level_radius * 2, 2, m_level_radius * 2);
 	Grid3D<GridData> grid(size.X, size.Y, size.Z);
-	PerlinNoise<256> noise(4444);
+	PerlinNoise<256> noise(seed);
 
-	grid.foreach([&noise](GridData* data, size_t x, size_t y, size_t z)
+	grid.foreach([&](GridData* data, size_t x, size_t y, size_t z)
 	{
-		float n = noise(0.25f * x, 0.25f * y, 0.25f * z);
+		float distance_factor = -(getClosestBaseDistance({ (f32)x, (f32)y, (f32)z }) - ((f32)m_level_radius * 0.25f));
+		float n = noise(0.25f * x, 0.25f * y, 0.25f * z) + distance_factor;
 		data->solid = n > 0.f;
 		data->used = false;
 	});
@@ -136,4 +158,18 @@ void LevelTask::generateGroundBlocks(unsigned bases)
 		else if (data->solid)
 			m_ground_blocks.push_back({ pos, { 1, 1, 1 } });
 	});
+}
+
+float LevelTask::getClosestBaseDistance(irr::core::vector3df pos) const
+{
+	float min_distance = (float)m_level_radius;
+
+	for (auto& base : m_base_positions)
+	{
+		float dist = pos.getDistanceFrom(base);
+		if (dist < min_distance)
+			min_distance = dist;
+	}
+
+	return min_distance;
 }
