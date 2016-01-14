@@ -327,12 +327,16 @@
     <ClInclude Include="src\3rd\irrlicht\vector3d.h" />
     <ClInclude Include="src\events.hpp" />
     <ClInclude Include="src\inputs.hpp" />
+    <ClInclude Include="src\meshes\cubemesh.hpp" />
+    <ClInclude Include="src\meshes\imesh.hpp" />
+    <ClInclude Include="src\meshes\roundedcubemesh.hpp" />
     <ClInclude Include="src\nodes\groundnode.hpp" />
     <ClInclude Include="src\tasks\maintask.hpp" />
     <ClInclude Include="src\utils\inputmanager.hpp" />
     <ClInclude Include="src\utils\grid.hpp" />
     <ClInclude Include="src\utils\materialfactory.hpp" />
     <ClInclude Include="src\tasks\cameracontroller.hpp" />
+    <ClInclude Include="src\utils\meshfactory.hpp" />
     <ClInclude Include="src\utils\perlin.hpp" />
     <ClInclude Include="src\quberaid.hpp" />
     <ClInclude Include="src\utils\shadercallback.hpp" />
@@ -346,6 +350,7 @@
     <ClCompile Include="src\utils\inputmanager.cpp" />
     <ClCompile Include="src\utils\materialfactory.cpp" />
     <ClCompile Include="src\tasks\cameracontroller.cpp" />
+    <ClCompile Include="src\utils\meshfactory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

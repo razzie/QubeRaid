@@ -10,6 +10,7 @@
 #include "quberaid.hpp"
 #include "nodes/groundnode.hpp"
 #include "utils/materialfactory.hpp"
+#include "utils/meshfactory.hpp"
 #include "utils/perlin.hpp"
 #include "utils/grid.hpp"
 
@@ -81,11 +82,11 @@ GroundNode::GroundNode(QubeRaid* app) :
 		core::vector3di pos((int)x, (int)y, (int)z);
 
 		if (find_block(pos, { 3, 2, 3 }))
-			addCube(pos, { 3, 2, 3 });
+			addBlock(pos, { 3, 2, 3 });
 		else if (find_block(pos, { 2, 1, 2 }))
-			addCube(pos, { 2, 1, 2 });
+			addBlock(pos, { 2, 1, 2 });
 		else if (data->solid)
-			addCube(pos);
+			addBlock(pos);
 	});
 
 	m_meshbuffer.recalculateBoundingBox();
@@ -135,65 +136,10 @@ video::SMaterial& GroundNode::getMaterial(u32 i)
 	return m_material;
 }
 
-void GroundNode::addCube(core::vector3di pos, core::vector3di size)
+void GroundNode::addBlock(core::vector3di pos, core::vector3di size)
 {
-	video::S3DVertex vertex_buf[8] =
-	{
-		// top - upper left
-		video::S3DVertex(0.f, 1.f, 0.f,  -0.5f, 0.5f, -0.5f,  0xffffffff,  0.f, 0.f),
-		// top - upper right
-		video::S3DVertex(1.f, 1.f, 0.f,  0.5f, 0.5f, -0.5f,  0xffffffff,  0.f, 0.f),
-		// top - lower right
-		video::S3DVertex(1.f, 1.f, 1.f,  0.5f, 0.5f, 0.5f,  0xffffffff,  0.f, 0.f),
-		// top - lower left
-		video::S3DVertex(0.f, 1.f, 1.f,  -0.5f, 0.5f, 0.5f,  0xffffffff,  0.f, 0.f),
-		// bottom - upper left
-		video::S3DVertex(0.f, 0.f, 0.f,  -0.5f, -0.5f, -0.5f,  0xffffffff,  0.f, 0.f),
-		// bottom - upper right
-		video::S3DVertex(1.f, 0.f, 0.f,  0.5f, -0.5f, -0.5f,  0xffffffff,  0.f, 0.f),
-		// bottom - lower right
-		video::S3DVertex(1.f, 0.f, 1.f,  0.5f, -0.5f, 0.5f,  0xffffffff,  0.f, 0.f),
-		// bottom - lower left
-		video::S3DVertex(0.f, 0.f, 1.f,  -0.5f, -0.5f, 0.5f,  0xffffffff,  0.f, 0.f)
-	};
-
-	u16 index_buf[36] =
-	{
-		// top
-		0, 2, 1, 0, 3, 2,
-		// front
-		3, 6, 2, 3, 7, 6,
-		// back
-		1, 4, 0, 1, 5, 4,
-		// left
-		0, 7, 3, 0, 4, 7,
-		// right
-		2, 5, 1, 2, 6, 5,
-		// bottom
-		4, 5, 6, 4, 6, 7
-	};
-
 	core::vector3df fpos((f32)pos.X, (f32)pos.Y, (f32)pos.Z);
 	core::vector3df fsize((f32)size.X, (f32)size.Y, (f32)size.Z);
 
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<f32> dis(-0.1f, 0.1f);
-
-	// pushing vertices to vertex buffer
-	for (int i = 0; i < 8; ++i)
-	{
-		auto v = vertex_buf[i];
-		v.Pos *= fsize;
-		v.Pos += fpos;
-		v.Pos += {dis(gen), dis(gen), dis(gen)};
-		m_vertices.push_back(v);
-	}
-
-	// pushing indices to index buffer
-	u16 base_index = m_vertices.size() - 8;
-	for (int i = 0; i < 36; ++i)
-	{
-		m_indices.push_back(index_buf[i] + base_index);
-	}
+	m_app->getMeshFactory()->append(MeshFactory::BuiltInMesh::ROUNDED_CUBE, &m_meshbuffer, fpos, fsize);
 }

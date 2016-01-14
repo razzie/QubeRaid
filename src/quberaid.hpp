@@ -36,6 +36,7 @@ std::shared_ptr<T> makeIrrPtr(T* p)
 
 class InputManager;
 class MaterialFactory;
+class MeshFactory;
 
 class QubeRaid
 {
@@ -56,6 +57,7 @@ public:
 	irr::scene::ICameraSceneNode* getCamera();
 	InputManager* getInputManager();
 	MaterialFactory* getMaterialFactory();
+	MeshFactory* getMeshFactory();
 
 private:
 	gg::ThreadPtr m_thread;
@@ -65,4 +67,5 @@ private:
 	irr::scene::ICameraSceneNode* m_cam;
 	InputManager* m_inputmgr;
 	MaterialFactory* m_matfactory;
+	MeshFactory* m_meshfactory;
 };

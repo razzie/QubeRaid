@@ -645,6 +645,18 @@
     <ClInclude Include="src\inputs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\meshes\imesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\meshes\cubemesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\meshes\roundedcubemesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\meshfactory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -669,6 +681,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\inputmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\meshfactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

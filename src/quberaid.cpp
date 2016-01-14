@@ -10,6 +10,7 @@
 #include "quberaid.hpp"
 #include "utils/inputmanager.hpp"
 #include "utils/materialfactory.hpp"
+#include "utils/meshfactory.hpp"
 #include "tasks/maintask.hpp"
 #include "tasks/cameracontroller.hpp"
 #include "nodes/groundnode.hpp"
@@ -35,6 +36,7 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_smgr = m_device->getSceneManager();
 	m_inputmgr = new InputManager(this);
 	m_matfactory = new MaterialFactory(this);
+	m_meshfactory = new MeshFactory(this);
 
 	m_device->setEventReceiver(m_inputmgr);
 	m_device->setResizable(true);
@@ -43,11 +45,18 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_cam = m_smgr->addCameraSceneNode(0, core::vector3df(0.f, 10.f, -10.f), core::vector3df(0.f, 0.f, 0.f));
 	//m_smgr->addLightSceneNode(0, { 0.f, 30.f, 30.f }, { 255, 255, 255, 255 }, 0.5f);
 	//m_smgr->addCubeSceneNode();
+
 	GroundNode* ground = new GroundNode(this);
+	ground->drop();
+	ground = nullptr;
 }
 
 QubeRaid::QubeRaid()
 {
+	delete m_matfactory;
+	delete m_meshfactory;
+	// m_device takes care of m_inputmgr
+	m_device->drop();
 }
 
 int QubeRaid::run()
@@ -86,4 +95,9 @@ irr::scene::ICameraSceneNode* QubeRaid::getCamera()
 MaterialFactory* QubeRaid::getMaterialFactory()
 {
 	return m_matfactory;
+}
+
+MeshFactory* QubeRaid::getMeshFactory()
+{
+	return m_meshfactory;
 }

@@ -6,13 +6,9 @@
  * All rights reserved.
  */
 
-//uniform vec3 camera_pos;
-//uniform vec3 light_pos;
-//uniform vec4 light_color;
-//varying vec3 pos;
+uniform vec4 outline_color;
 
 void main(void)
 {
-    //gl_FragColor = gl_Color;
-	gl_FragColor = vec4(1.0, 0.0, 0.0, 0.0);
+	gl_FragColor = outline_color;
 }

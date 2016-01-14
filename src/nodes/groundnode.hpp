@@ -30,5 +30,5 @@ private:
 	irr::scene::CIndexBuffer m_indices;
 	irr::scene::CDynamicMeshBuffer m_meshbuffer;
 
-	void addCube(irr::core::vector3di pos, irr::core::vector3di size = { 1,1,1 });
+	void addBlock(irr::core::vector3di pos, irr::core::vector3di size = { 1,1,1 });
 };

@@ -38,6 +38,9 @@ public:
 
 		irr::video::SColorf light_color(1.f, 1.f, 1.f);
 		services->setVertexShaderConstant("light_color", reinterpret_cast<irr::f32*>(&light_color), 4);
+
+		irr::video::SColorf outline_color(0.f, 0.f, 0.f);
+		services->setVertexShaderConstant("outline_color", reinterpret_cast<irr::f32*>(&outline_color), 4);
 	}
 
 private:
