@@ -22,8 +22,8 @@ using namespace irr;
 LevelTask::LevelTask(QubeRaid* app) :
 	m_app(app)
 {
-	m_level_radius = 20;
-	m_base_count = 5;
+	m_level_radius = 30;
+	m_base_count = 3;
 
 	generateBasePositions();
 	generateGroundBlocks(4444);
@@ -109,7 +109,7 @@ void LevelTask::generateGroundBlocks(unsigned seed)
 
 	grid.foreach([&](GridData* data, size_t x, size_t y, size_t z)
 	{
-		float distance_factor = -(getClosestBaseDistance({ (f32)x, (f32)y, (f32)z }) - ((f32)m_level_radius * 0.25f));
+		float distance_factor = -(getClosestBaseDistance({ (f32)x, (f32)y, (f32)z }) - ((f32)m_level_radius * 0.25f)) / 8.f;
 		float n = noise(0.25f * x, 0.25f * y, 0.25f * z) + distance_factor;
 		data->solid = n > 0.f;
 		data->used = false;
@@ -167,6 +167,10 @@ float LevelTask::getClosestBaseDistance(irr::core::vector3df pos) const
 	for (auto& base : m_base_positions)
 	{
 		float dist = pos.getDistanceFrom(base);
+		if (dist < min_distance)
+			min_distance = dist;
+
+		dist = core::line3df(m_base_positions[0], base).getClosestPoint(pos).getDistanceFrom(pos) * 2.f;
 		if (dist < min_distance)
 			min_distance = dist;
 	}
