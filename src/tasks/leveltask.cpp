@@ -9,7 +9,7 @@
 #include <cmath>
 #include <gg/logger.hpp>
 #include "quberaid.hpp"
-#include "events.hpp"
+#include "events/inputevents.hpp"
 #include "tasks/leveltask.hpp"
 #include "tasks/cameracontroller.hpp"
 #include "nodes/groundnode.hpp"

@@ -8,7 +8,7 @@
 
 #include <irrlicht.h>
 #include "quberaid.hpp"
-#include "events.hpp"
+#include "events/inputevents.hpp"
 #include "tasks/cameracontroller.hpp"
 
 

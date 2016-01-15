@@ -624,9 +624,6 @@
     <ClInclude Include="src\utils\materialfactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\events.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\tasks\cameracontroller.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -663,6 +660,9 @@
     <ClInclude Include="src\tasks\leveltask.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\events\inputevents.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -672,9 +672,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\materialfactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tasks\cameracontroller.cpp">
@@ -696,6 +693,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tasks\leveltask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

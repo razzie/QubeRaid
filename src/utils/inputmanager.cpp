@@ -7,7 +7,7 @@
  */
 
 #include <irrlicht.h>
-#include "events.hpp"
+#include "events/inputevents.hpp"
 #include "utils/inputmanager.hpp"
 #include "quberaid.hpp"
 #include "inputs.hpp"
