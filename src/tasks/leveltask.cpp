@@ -9,6 +9,7 @@
 #include <cmath>
 #include <gg/logger.hpp>
 #include "quberaid.hpp"
+#include "level/level.hpp"
 #include "events/inputevents.hpp"
 #include "tasks/leveltask.hpp"
 #include "tasks/cameracontroller.hpp"
@@ -22,13 +23,10 @@ using namespace irr;
 LevelTask::LevelTask(QubeRaid* app) :
 	m_app(app)
 {
-	m_level_radius = 30;
-	m_base_count = 3;
+	auto level = std::make_shared<Level>(m_app);
+	m_app->setLevel(level);
 
-	generateBasePositions();
-	generateGroundBlocks(4444);
-
-	m_ground = new GroundNode(m_app, m_ground_blocks);
+	m_ground = new GroundNode(m_app, level->getGroundBlocks());
 }
 
 LevelTask::~LevelTask()
@@ -78,102 +76,4 @@ void LevelTask::onError(gg::ITaskOptions& options, std::exception& e)
 
 void LevelTask::onFinish(gg::ITaskOptions& options)
 {
-}
-
-void LevelTask::generateBasePositions()
-{
-	float base_angle = 360.f / m_base_count;
-	core::vector3df center((f32)m_level_radius, 0.f, (f32)m_level_radius);
-
-	m_base_positions.push_back(center);
-
-	for (unsigned i = 0; i < m_base_count; ++i)
-	{
-		core::vector3df base(std::sin(core::degToRad(base_angle * i)), 0.f, std::cos(core::degToRad(base_angle * i)));
-		base *= (0.5f * m_level_radius);
-		m_base_positions.push_back(center + base);
-	}
-}
-
-void LevelTask::generateGroundBlocks(unsigned seed)
-{
-	struct GridData
-	{
-		unsigned char solid : 1;
-		volatile unsigned char used : 1;
-	};
-
-	core::vector3di size(m_level_radius * 2, 2, m_level_radius * 2);
-	Grid3D<GridData> grid(size.X, size.Y, size.Z);
-	PerlinNoise<256> noise(seed);
-
-	grid.foreach([&](GridData* data, size_t x, size_t y, size_t z)
-	{
-		float distance_factor = -(getClosestBaseDistance({ (f32)x, (f32)y, (f32)z }) - ((f32)m_level_radius * 0.25f)) / 8.f;
-		float n = noise(0.25f * x, 0.25f * y, 0.25f * z) + distance_factor;
-		data->solid = n > 0.f;
-		data->used = false;
-	});
-
-	auto find_block = [&](core::vector3di pos, core::vector3di size) -> bool
-	{
-		for (int x = pos.X; x < pos.X + size.X; ++x)
-		{
-			for (int y = pos.Y; y < pos.Y + size.Y; ++y)
-			{
-				for (int z = pos.Z; z < pos.Z + size.Z; ++z)
-				{
-					GridData* data = grid(x, y, z);
-					if (data == nullptr || !data->solid || data->used)
-						return false;
-				}
-			}
-		}
-
-		for (int x = pos.X; x < pos.X + size.X; ++x)
-		{
-			for (int y = pos.Y; y < pos.Y + size.Y; ++y)
-			{
-				for (int z = pos.Z; z < pos.Z + size.Z; ++z)
-				{
-					grid(x, y, z)->used = true;
-				}
-			}
-		}
-
-		return true;
-	};
-
-	grid.foreach([&](GridData* data, size_t x, size_t y, size_t z)
-	{
-		if (data->used)
-			return;
-
-		core::vector3di pos((int)x, (int)y, (int)z);
-
-		if (find_block(pos, { 3, 2, 3 }))
-			m_ground_blocks.push_back({ pos, { 3, 2, 3 } });
-		else if (find_block(pos, { 2, 1, 2 }))
-			m_ground_blocks.push_back({ pos, { 2, 1, 2 } });
-		else if (data->solid)
-			m_ground_blocks.push_back({ pos, { 1, 1, 1 } });
-	});
-}
-
-float LevelTask::getClosestBaseDistance(irr::core::vector3df pos) const
-{
-	float min_distance = (float)m_level_radius;
-
-	for (auto& base : m_base_positions)
-	{
-		float dist = pos.getDistanceFrom(base);
-		if (dist < min_distance)
-			min_distance = dist;
-
-		dist = core::line3df(m_base_positions[0], base).getClosestPoint(pos).getDistanceFrom(pos) * 2.f;
-		if (dist < min_distance)
-			min_distance = dist;
-	}
-
-	return min_distance;
 }

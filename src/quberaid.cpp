@@ -95,3 +95,13 @@ InputManager* QubeRaid::getInputManager()
 {
 	return m_inputmgr;
 }
+
+std::shared_ptr<Level> QubeRaid::getLevel() const
+{
+	return m_level;
+}
+
+void QubeRaid::setLevel(std::shared_ptr<Level> level)
+{
+	m_level = level;
+}

@@ -14,7 +14,7 @@
 using namespace irr;
 
 
-GroundNode::GroundNode(QubeRaid* app, const std::vector<std::pair<core::vector3di, core::vector3di>>& blocks) :
+GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blocks) :
 	BaseNode(app)
 {
 	setOutline(true);
@@ -22,7 +22,7 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<std::pair<core::vector3d
 
 	for (auto& block : blocks)
 	{
-		addBlock(block.first, block.second);
+		addBlock(block);
 	}
 
 	m_meshbuffer.recalculateBoundingBox();
@@ -36,10 +36,13 @@ GroundNode::~GroundNode()
 {
 }
 
-void GroundNode::addBlock(core::vector3di pos, core::vector3di size)
+void GroundNode::addBlock(const Level::GroundBlock& block)
 {
+	core::vector3di pos = block.box.MinEdge;
+	core::vector3di size = block.box.MaxEdge - block.box.MinEdge;
+
 	core::vector3df fpos((f32)pos.X, (f32)pos.Y, (f32)pos.Z);
 	core::vector3df fsize((f32)size.X, (f32)size.Y, (f32)size.Z);
 
-	RoundedCubeMesh().append(&m_meshbuffer, fpos, fsize);
+	RoundedCubeMesh().append(&m_meshbuffer, fpos, fsize, block.color);
 }

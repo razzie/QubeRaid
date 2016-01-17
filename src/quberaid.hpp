@@ -36,6 +36,7 @@ std::shared_ptr<T> makeIrrPtr(T* p)
 
 class Resources;
 class InputManager;
+class Level;
 
 class QubeRaid
 {
@@ -56,6 +57,8 @@ public:
 	irr::scene::ICameraSceneNode* getCamera();
 	Resources* getResources();
 	InputManager* getInputManager();
+	std::shared_ptr<Level> getLevel() const;
+	void setLevel(std::shared_ptr<Level>);
 
 private:
 	gg::ThreadPtr m_thread;
@@ -65,4 +68,5 @@ private:
 	irr::scene::ICameraSceneNode* m_cam;
 	Resources* m_resources;
 	InputManager* m_inputmgr;
+	std::shared_ptr<Level> m_level;
 };

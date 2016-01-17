@@ -326,6 +326,8 @@
     <ClInclude Include="src\3rd\irrlicht\vector2d.h" />
     <ClInclude Include="src\3rd\irrlicht\vector3d.h" />
     <ClInclude Include="src\events\inputevents.hpp" />
+    <ClInclude Include="src\level\level.hpp" />
+    <ClInclude Include="src\level\levelgenerator.hpp" />
     <ClInclude Include="src\materials\basematerial.hpp" />
     <ClInclude Include="src\materials\flatmaterial.hpp" />
     <ClInclude Include="src\materials\groundmaterial.hpp" />
@@ -348,6 +350,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\events\inputevents.cpp" />
+    <ClCompile Include="src\level\level.cpp" />
+    <ClCompile Include="src\level\levelgenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\materials\basematerial.cpp" />
     <ClCompile Include="src\materials\flatmaterial.cpp" />

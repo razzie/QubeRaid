@@ -672,6 +672,12 @@
     <ClInclude Include="src\materials\flatmaterial.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\level\level.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\level\levelgenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -717,6 +723,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\materials\flatmaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\level\level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\level\levelgenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

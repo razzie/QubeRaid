@@ -9,18 +9,18 @@
 #pragma once
 
 #include <vector>
-#include <utility> // std::pair
 #include <irrlicht.h>
 #include "nodes/basenode.hpp"
+#include "level/level.hpp" // Level::GroundBlock
 
 class QubeRaid;
 
 class GroundNode : public BaseNode
 {
 public:
-	GroundNode(QubeRaid*, const std::vector<std::pair<irr::core::vector3di, irr::core::vector3di>>& blocks);
+	GroundNode(QubeRaid*, const std::vector<Level::GroundBlock>& blocks);
 	virtual ~GroundNode();
 
 private:
-	void addBlock(irr::core::vector3di pos, irr::core::vector3di size = { 1,1,1 });
+	void addBlock(const Level::GroundBlock&);
 };
