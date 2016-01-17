@@ -9,9 +9,7 @@
 #include <gg/logger.hpp>
 #include <irrlicht.h>
 #include "quberaid.hpp"
-#include "utils/materialfactory.hpp"
 #include "events/inputevents.hpp"
-#include "utils/shadercallback.hpp"
 #include "tasks/cameracontroller.hpp"
 #include "tasks/maintask.hpp"
 

@@ -7,31 +7,20 @@
  */
 
 #include <random>
-#include "utils/meshfactory.hpp"
-#include "meshes/cubemesh.hpp"
-#include "meshes/roundedcubemesh.hpp"
+#include "meshes/basemesh.hpp"
 
 using namespace irr;
 
 
-MeshFactory::MeshFactory(QubeRaid* app) :
-	m_app(app)
+void BaseMesh::append(scene::IDynamicMeshBuffer* buf, core::vector3df translate, core::vector3df scale, irr::video::SColor color, f32 randomize) const
 {
-}
-
-MeshFactory::~MeshFactory()
-{
-}
-
-void MeshFactory::append(const IMesh* mesh, scene::IDynamicMeshBuffer* buf, core::vector3df translate, core::vector3df scale, irr::video::SColor color, f32 randomize) const
-{
-	size_t vertex_count = mesh->getVertexCount();
-	auto* src_vertices = mesh->getVertices();
+	size_t vertex_count = this->getVertexCount();
+	auto* src_vertices = this->getVertices();
 	auto& dest_vertices = buf->getVertexBuffer();
 
-	size_t index_count = mesh->getIndexCount();
+	size_t index_count = this->getIndexCount();
 	u16 base_index = buf->getVertexCount();
-	auto* src_indices = mesh->getIndices();
+	auto* src_indices = this->getIndices();
 	auto& dest_indices = buf->getIndexBuffer();
 
 	if (randomize > 0.f)
@@ -65,28 +54,5 @@ void MeshFactory::append(const IMesh* mesh, scene::IDynamicMeshBuffer* buf, core
 	for (size_t i = 0; i < index_count; ++i)
 	{
 		dest_indices.push_back(src_indices[i] + base_index);
-	}
-}
-
-void MeshFactory::append(BuiltInMesh mesh, scene::IDynamicMeshBuffer* buf, core::vector3df translate, core::vector3df scale, irr::video::SColor color, f32 randomize) const
-{
-	switch (mesh)
-	{
-	case BuiltInMesh::CUBE:
-		{
-			CubeMesh m;
-			append(&m, buf, translate, scale, color, randomize);
-			return;
-		}
-
-	case BuiltInMesh::ROUNDED_CUBE:
-		{
-			RoundedCubeMesh m;
-			append(&m, buf, translate, scale, color, randomize);
-			return;
-		}
-
-	default:
-		return;
 	}
 }

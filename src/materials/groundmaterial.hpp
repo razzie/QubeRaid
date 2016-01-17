@@ -6,13 +6,12 @@
  * All rights reserved.
  */
 
-uniform mat4 world;
-uniform mat4 world_view_proj;
-varying vec3 pos;
+#pragma once
 
-void main(void)
+#include "materials/basematerial.hpp"
+
+class GroundMaterial : public BaseMaterial
 {
-	gl_Position = world_view_proj * gl_Vertex;
-	gl_FrontColor = gl_Color;
-	pos = (world * gl_Vertex).xyz;
-}
+public:
+	GroundMaterial(QubeRaid*);
+};

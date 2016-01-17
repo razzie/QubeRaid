@@ -12,11 +12,11 @@
 
 class QubeRaid;
 
-class NodeBase : public irr::scene::ISceneNode
+class BaseNode : public irr::scene::ISceneNode
 {
 public:
-	NodeBase(QubeRaid*, irr::scene::ISceneNode* parent = nullptr);
-	virtual ~NodeBase();
+	BaseNode(QubeRaid*, irr::scene::ISceneNode* parent = nullptr);
+	virtual ~BaseNode();
 	virtual void OnRegisterSceneNode();
 	virtual void render();
 	virtual const irr::core::aabbox3d<irr::f32>& getBoundingBox() const;
@@ -26,10 +26,11 @@ public:
 
 protected:
 	QubeRaid* m_app;
-	irr::video::SMaterial m_material;
 	irr::scene::CVertexBuffer m_vertices;
 	irr::scene::CIndexBuffer m_indices;
 	irr::scene::CDynamicMeshBuffer m_meshbuffer;
+	irr::video::SMaterial m_material;
+	irr::video::SMaterial m_outline_material;
 	irr::video::SColor m_outline_color;
 	bool m_outline;
 };

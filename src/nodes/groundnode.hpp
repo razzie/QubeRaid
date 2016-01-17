@@ -11,11 +11,11 @@
 #include <vector>
 #include <utility> // std::pair
 #include <irrlicht.h>
-#include "nodes/nodebase.hpp"
+#include "nodes/basenode.hpp"
 
 class QubeRaid;
 
-class GroundNode : public NodeBase
+class GroundNode : public BaseNode
 {
 public:
 	GroundNode(QubeRaid*, const std::vector<std::pair<irr::core::vector3di, irr::core::vector3di>>& blocks);

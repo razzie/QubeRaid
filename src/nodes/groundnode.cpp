@@ -7,18 +7,18 @@
  */
 
 #include "quberaid.hpp"
+#include "resources.hpp"
 #include "nodes/groundnode.hpp"
-#include "utils/materialfactory.hpp"
-#include "utils/meshfactory.hpp"
+#include "meshes/roundedcubemesh.hpp"
 
 using namespace irr;
 
 
 GroundNode::GroundNode(QubeRaid* app, const std::vector<std::pair<core::vector3di, core::vector3di>>& blocks) :
-	NodeBase(app)
+	BaseNode(app)
 {
 	setOutline(true);
-	m_material = m_app->getMaterialFactory()->getGroundMaterial();
+	m_material = app->getResources()->getMaterial(Resources::Material::GROUND);
 
 	for (auto& block : blocks)
 	{
@@ -41,5 +41,5 @@ void GroundNode::addBlock(core::vector3di pos, core::vector3di size)
 	core::vector3df fpos((f32)pos.X, (f32)pos.Y, (f32)pos.Z);
 	core::vector3df fsize((f32)size.X, (f32)size.Y, (f32)size.Z);
 
-	m_app->getMeshFactory()->append(MeshFactory::BuiltInMesh::ROUNDED_CUBE, &m_meshbuffer, fpos, fsize);
+	RoundedCubeMesh().append(&m_meshbuffer, fpos, fsize);
 }

@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include "meshes/imesh.hpp"
+#include "meshes/basemesh.hpp"
 
-class CubeMesh : public IMesh
+class CubeMesh : public BaseMesh
 {
 public:
 	const irr::video::S3DVertex* getVertices() const

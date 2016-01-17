@@ -8,9 +8,8 @@
 
 #include <irrlicht.h>
 #include "quberaid.hpp"
+#include "resources.hpp"
 #include "utils/inputmanager.hpp"
-#include "utils/materialfactory.hpp"
-#include "utils/meshfactory.hpp"
 #include "tasks/maintask.hpp"
 #include "tasks/leveltask.hpp"
 #include "tasks/cameracontroller.hpp"
@@ -34,9 +33,8 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_device = createDeviceEx(params);
 	m_driver = m_device->getVideoDriver();
 	m_smgr = m_device->getSceneManager();
+	m_resources = new Resources(this);
 	m_inputmgr = new InputManager(this);
-	m_matfactory = new MaterialFactory(this);
-	m_meshfactory = new MeshFactory(this);
 
 	m_device->setEventReceiver(m_inputmgr);
 	m_device->setResizable(true);
@@ -49,8 +47,7 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 
 QubeRaid::QubeRaid()
 {
-	delete m_matfactory;
-	delete m_meshfactory;
+	delete m_resources;
 	// m_device takes care of m_inputmgr
 	m_device->drop();
 }
@@ -89,12 +86,12 @@ irr::scene::ICameraSceneNode* QubeRaid::getCamera()
 	return m_cam;
 }
 
-MaterialFactory* QubeRaid::getMaterialFactory()
+Resources* QubeRaid::getResources()
 {
-	return m_matfactory;
+	return m_resources;
 }
 
-MeshFactory* QubeRaid::getMeshFactory()
+InputManager* QubeRaid::getInputManager()
 {
-	return m_meshfactory;
+	return m_inputmgr;
 }

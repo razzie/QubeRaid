@@ -6,9 +6,15 @@
  * All rights reserved.
  */
 
-uniform vec4 outline_color;
+#pragma once
 
-void main(void)
+#include <irrlicht.h>
+
+class QubeRaid;
+
+class BaseMaterial : public irr::video::SMaterial
 {
-	gl_FragColor = outline_color;
-}
+public:
+	BaseMaterial(QubeRaid*, const char* vs, const char* ps);
+	~BaseMaterial();
+};

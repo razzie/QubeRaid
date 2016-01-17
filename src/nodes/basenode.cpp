@@ -7,17 +7,18 @@
  */
 
 #include "quberaid.hpp"
-#include "nodes/nodebase.hpp"
-#include "utils/materialfactory.hpp"
+#include "resources.hpp"
+#include "nodes/basenode.hpp"
 
 using namespace irr;
 
-NodeBase::NodeBase(QubeRaid* app, scene::ISceneNode* parent) :
+BaseNode::BaseNode(QubeRaid* app, scene::ISceneNode* parent) :
 	scene::ISceneNode(parent ? parent : app->getSceneManager()->getRootSceneNode(), app->getSceneManager()),
 	m_app(app),
 	m_vertices(video::EVT_STANDARD),
 	m_indices(video::EIT_16BIT),
 	m_meshbuffer(video::EVT_STANDARD, video::EIT_16BIT),
+	m_outline_material(app->getResources()->getMaterial(Resources::Material::OUTLINE)),
 	m_outline_color(0xff000000),
 	m_outline(false)
 {
@@ -25,11 +26,11 @@ NodeBase::NodeBase(QubeRaid* app, scene::ISceneNode* parent) :
 	m_meshbuffer.setIndexBuffer(&m_indices);
 }
 
-NodeBase::~NodeBase()
+BaseNode::~BaseNode()
 {
 }
 
-void NodeBase::OnRegisterSceneNode()
+void BaseNode::OnRegisterSceneNode()
 {
 	if (IsVisible)
 		SceneManager->registerNodeForRendering(this);
@@ -37,7 +38,7 @@ void NodeBase::OnRegisterSceneNode()
 	ISceneNode::OnRegisterSceneNode();
 }
 
-void NodeBase::render()
+void BaseNode::render()
 {
 	video::IVideoDriver* driver = SceneManager->getVideoDriver();
 
@@ -45,7 +46,7 @@ void NodeBase::render()
 
 	if (m_outline)
 	{
-		driver->setMaterial(m_app->getMaterialFactory()->getOutlineMaterial());
+		driver->setMaterial(m_outline_material);
 		driver->drawMeshBuffer(&m_meshbuffer);
 	}
 
@@ -53,22 +54,22 @@ void NodeBase::render()
 	driver->drawMeshBuffer(&m_meshbuffer);
 }
 
-const core::aabbox3d<f32>& NodeBase::getBoundingBox() const
+const core::aabbox3d<f32>& BaseNode::getBoundingBox() const
 {
 	return m_meshbuffer.getBoundingBox();
 }
 
-u32 NodeBase::getMaterialCount() const
+u32 BaseNode::getMaterialCount() const
 {
 	return 1;
 }
 
-video::SMaterial& NodeBase::getMaterial(u32 i)
+video::SMaterial& BaseNode::getMaterial(u32 i)
 {
 	return m_material;
 }
 
-void NodeBase::setOutline(bool enabled, video::SColor color)
+void BaseNode::setOutline(bool enabled, video::SColor color)
 {
 	m_outline = enabled;
 	m_outline_color = color;
