@@ -236,3 +236,23 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 			add_block(pos, { 1, 1, 1 });
 	});
 }
+
+void LevelGenerator::optimize(std::vector<Level::Island>& islands) const
+{
+	if (islands.empty())
+		return;
+
+	core::vector2df min_edge = islands[0].position;
+	for (auto& island : islands)
+	{
+		if (min_edge.X > (island.position.X - island.radius))
+			min_edge.X = (island.position.X - island.radius);
+		if (min_edge.Y > (island.position.Y - island.radius))
+			min_edge.Y = (island.position.Y - island.radius);
+	}
+
+	for (auto& island : islands)
+	{
+		island.position -= min_edge;
+	}
+}

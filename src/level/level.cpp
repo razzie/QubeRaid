@@ -18,6 +18,7 @@ Level::Level(QubeRaid* app) :
 {
 	LevelGenerator gen(4444);
 	gen.generate(LevelGenerator::Pattern::STAR, 6, 0, m_islands, m_routes);
+	gen.optimize(m_islands);
 	gen.generate(m_islands, m_routes, m_ground_blocks);
 }
 
