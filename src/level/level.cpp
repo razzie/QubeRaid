@@ -16,7 +16,7 @@ using namespace irr;
 Level::Level(QubeRaid* app) :
 	m_app(app)
 {
-	LevelGenerator gen(4444);
+	LevelGenerator gen(12345);
 	gen.generate(LevelGenerator::Pattern::STAR, 6, 0, m_islands, m_routes);
 	gen.optimize(m_islands);
 	gen.generate(m_islands, m_routes, m_ground_blocks);

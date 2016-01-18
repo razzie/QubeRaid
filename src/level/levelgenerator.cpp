@@ -7,7 +7,7 @@
  */
 
 #include <cmath>
-//#include <random>
+#include <random>
 #include "levelgenerator.hpp"
 #include "utils/perlin.hpp"
 #include "utils/grid.hpp"
@@ -212,12 +212,18 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 		return true;
 	};
 
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<u32> dis(128, 255);
+
 	auto add_block = [&](core::vector3di pos, core::vector3di size)
 	{
 		Level::GroundBlock block;
 		block.box.MinEdge = pos;
 		block.box.MaxEdge = pos + size;
-		block.color = 0xffffffff;
+		//block.color = 0xffffffff;
+		u32 color = dis(gen);
+		block.color = video::SColor(255, color, color, color);
 		out_ground_blocks.push_back(block);
 	};
 
