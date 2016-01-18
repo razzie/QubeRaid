@@ -30,6 +30,16 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blo
 	m_meshbuffer.setDirty();
 
 	setPosition( -getBoundingBox().getCenter() );
+
+	scene::ISceneManager* smgr = getSceneManager();
+	for (auto& island : m_app->getLevel()->getIslands())
+	{
+		auto* billboard = smgr->addBillboardSceneNode(this, { 2.f, 2.f }, { island.position.X, 5.f, island.position.Y });
+		billboard->setMaterialTexture(0, m_app->getDriver()->getTexture("../assets/home.png"));
+		billboard->setMaterialType(video::E_MATERIAL_TYPE::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
+		billboard->getMaterial(0).Lighting = false;
+		//billboard->drop();
+	}
 }
 
 GroundNode::~GroundNode()

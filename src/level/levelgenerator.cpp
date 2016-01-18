@@ -223,7 +223,7 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 		block.box.MaxEdge = pos + size;
 		//block.color = 0xffffffff;
 		u32 color = dis(gen);
-		block.color = video::SColor(255, color, color, color);
+		block.color = video::SColor(255, color, 255, color);
 		out_ground_blocks.push_back(block);
 	};
 
