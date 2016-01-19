@@ -9,6 +9,7 @@
 #pragma once
 
 #include <gg/thread.hpp>
+#include "utils/mousepointer.hpp"
 
 class QubeRaid;
 
@@ -30,4 +31,5 @@ private:
 	irr::video::IVideoDriver* m_driver;
 	irr::scene::ISceneManager* m_smgr;
 	irr::scene::ICameraSceneNode* m_cam;
+	MousePointer m_mouse;
 };
