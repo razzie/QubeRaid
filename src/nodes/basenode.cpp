@@ -7,7 +7,6 @@
  */
 
 #include "quberaid.hpp"
-#include "resources.hpp"
 #include "nodes/basenode.hpp"
 
 using namespace irr;
@@ -18,7 +17,7 @@ BaseNode::BaseNode(QubeRaid* app, scene::ISceneNode* parent) :
 	m_vertices(video::EVT_STANDARD),
 	m_indices(video::EIT_16BIT),
 	m_meshbuffer(video::EVT_STANDARD, video::EIT_16BIT),
-	m_outline_material(app->getResources()->getMaterial(Resources::Material::OUTLINE)),
+	m_outline_material(*app->getResources()->get<video::SMaterial>("material_outline")),
 	m_outline_color(0xff000000),
 	m_outline(false)
 {

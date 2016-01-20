@@ -7,7 +7,6 @@
  */
 
 #include "quberaid.hpp"
-#include "resources.hpp"
 #include "nodes/groundnode.hpp"
 #include "meshes/roundedcubemesh.hpp"
 
@@ -18,7 +17,7 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blo
 	BaseNode(app)
 {
 	setOutline(true);
-	m_material = app->getResources()->getMaterial(Resources::Material::GROUND);
+	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
 
 	for (auto& block : blocks)
 	{

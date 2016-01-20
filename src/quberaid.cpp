@@ -8,7 +8,6 @@
 
 #include <irrlicht.h>
 #include "quberaid.hpp"
-#include "resources.hpp"
 #include "utils/inputmanager.hpp"
 #include "tasks/maintask.hpp"
 #include "tasks/leveltask.hpp"
@@ -18,7 +17,8 @@ using namespace irr;
 
 
 QubeRaid::QubeRaid(int argc, char** argv) :
-	m_thread(gg::threadmgr.createThread("Main"))
+	m_thread(gg::threadmgr.createThread("Main")),
+	m_resources(gg::res.createResourcePool())
 {
 	SIrrlichtCreationParameters params; // constructor sets the defaults
 	params.AntiAlias = 16;
@@ -33,7 +33,6 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_device = createDeviceEx(params);
 	m_driver = m_device->getVideoDriver();
 	m_smgr = m_device->getSceneManager();
-	m_resources = new Resources(this);
 	m_inputmgr = new InputManager(this);
 
 	m_device->setEventReceiver(m_inputmgr);
@@ -43,11 +42,12 @@ QubeRaid::QubeRaid(int argc, char** argv) :
 	m_cam = m_smgr->addCameraSceneNode(0, core::vector3df(0.f, 10.f, -10.f), core::vector3df(0.f, 0.f, 0.f));
 	//m_smgr->addLightSceneNode(0, { 0.f, 30.f, 30.f }, { 255, 255, 255, 255 }, 0.5f);
 	//m_smgr->addCubeSceneNode();
+
+	initResources();
 }
 
 QubeRaid::QubeRaid()
 {
-	delete m_resources;
 	// m_device takes care of m_inputmgr
 	m_device->drop();
 }
@@ -59,11 +59,6 @@ int QubeRaid::run()
 	m_thread->addTask<LevelTask, State::GAME>(this);
 	m_thread->addTask<CameraController, State::GAME>(this);
 	return m_thread->run(gg::IThread::Mode::LOCAL);
-}
-
-void QubeRaid::sendEvent(gg::EventPtr event)
-{
-	m_thread->sendEvent(event);
 }
 
 irr::IrrlichtDevice* QubeRaid::getDevice()
@@ -86,7 +81,7 @@ irr::scene::ICameraSceneNode* QubeRaid::getCamera()
 	return m_cam;
 }
 
-Resources* QubeRaid::getResources()
+gg::ResourcePoolPtr QubeRaid::getResources()
 {
 	return m_resources;
 }
@@ -94,6 +89,11 @@ Resources* QubeRaid::getResources()
 InputManager* QubeRaid::getInputManager()
 {
 	return m_inputmgr;
+}
+
+void QubeRaid::sendEvent(gg::EventPtr event)
+{
+	m_thread->sendEvent(event);
 }
 
 std::shared_ptr<Level> QubeRaid::getLevel() const
@@ -104,4 +104,25 @@ std::shared_ptr<Level> QubeRaid::getLevel() const
 void QubeRaid::setLevel(std::shared_ptr<Level> level)
 {
 	m_level = level;
+}
+
+
+/** --- RESOURCES --- */
+
+#include "materials/linematerial.hpp"
+#include "materials/flatmaterial.hpp"
+#include "materials/outlinematerial.hpp"
+#include "materials/groundmaterial.hpp"
+#include "meshes/cubemesh.hpp"
+#include "meshes/roundedcubemesh.hpp"
+
+void QubeRaid::initResources()
+{
+	m_resources->add<LineMaterial>("material_line");
+	m_resources->add<FlatMaterial>("material_flat", this);
+	m_resources->add<OutlineMaterial>("material_outline", this);
+	m_resources->add<GroundMaterial>("material_ground", this);
+
+	m_resources->add<CubeMesh>("mesh_cube");
+	m_resources->add<RoundedCubeMesh>("mesh_roundedcube");
 }

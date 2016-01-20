@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <gg/thread.hpp>
+#include <gg/resource.hpp>
 
 namespace irr
 {
@@ -34,7 +35,6 @@ std::shared_ptr<T> makeIrrPtr(T* p)
 	return std::shared_ptr<T>(p, [](T* p) { p->drop(); });
 }
 
-class Resources;
 class InputManager;
 class Level;
 
@@ -50,23 +50,25 @@ public:
 	QubeRaid(int argc, char** argv);
 	QubeRaid();
 	int run();
-	void sendEvent(gg::EventPtr);
 	irr::IrrlichtDevice* getDevice();
 	irr::video::IVideoDriver* getDriver();
 	irr::scene::ISceneManager* getSceneManager();
 	irr::scene::ICameraSceneNode* getCamera();
-	Resources* getResources();
+	gg::ResourcePoolPtr getResources();
 	InputManager* getInputManager();
+	void sendEvent(gg::EventPtr);
 	std::shared_ptr<Level> getLevel() const;
 	void setLevel(std::shared_ptr<Level>);
 
 private:
 	gg::ThreadPtr m_thread;
+	gg::ResourcePoolPtr m_resources;
 	irr::IrrlichtDevice* m_device;
 	irr::video::IVideoDriver* m_driver;
 	irr::scene::ISceneManager* m_smgr;
 	irr::scene::ICameraSceneNode* m_cam;
-	Resources* m_resources;
 	InputManager* m_inputmgr;
 	std::shared_ptr<Level> m_level;
+
+	void initResources();
 };
