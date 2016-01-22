@@ -10,6 +10,7 @@
 #include "level/level.hpp"
 #include "level/pathfinder.hpp"
 #include "nodes/quboidnode.hpp"
+#include "nodes/animators/walkanimator.hpp"
 #include "meshes/roundedcubemesh.hpp"
 
 using namespace irr;
@@ -39,11 +40,12 @@ void QuboidNode::walkTo(core::vector2df pos)
 	std::vector<core::vector2df> path;
 	if (m_app->getLevel()->getPathfinder()->getPath({ getPosition().X, getPosition().Z }, pos, path))
 	{
-		core::array<core::vector3df> path3d;
-		for (auto p : path)
-			path3d.push_back({ p.X, 0.f, p.Y });
+		//core::array<core::vector3df> path3d;
+		//for (auto p : path)
+		//	path3d.push_back({ p.X, 0.f, p.Y });
 
-		scene::ISceneNodeAnimator* anim = m_app->getSceneManager()->createFollowSplineAnimator(0, path3d, 3.f, 0.5f, false, false);
+		//scene::ISceneNodeAnimator* anim = m_app->getSceneManager()->createFollowSplineAnimator(0, path3d, 3.f, 0.5f, false, false);
+		scene::ISceneNodeAnimator* anim = new WalkAnimator(this, path);
 		addAnimator(anim);
 		anim->drop();
 	}

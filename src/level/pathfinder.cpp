@@ -35,17 +35,23 @@ Pathfinder::Pathfinder(const Level* level)
 		}
 	}
 
+	const float straight_cost = 1.f;
+	const float diagonal_cost = 1.41421356237f;
 	for (auto& state : m_states)
 	{
 		auto pos = state.first;
 		auto adjacents = state.second.adjacents;
-		adjacents[0] = findState(pos + core::vector2df{ 1.f, 0.f });
-		adjacents[1] = findState(pos + core::vector2df{ -1.f, 0.f });
-		adjacents[2] = findState(pos + core::vector2df{ 0.f, 1.f });
-		adjacents[3] = findState(pos + core::vector2df{ 0.f, -1.f });
+		adjacents[0] = { (void*)findState(pos + core::vector2df{ -1.f, -1.f }), diagonal_cost };
+		adjacents[1] = { (void*)findState(pos + core::vector2df{  0.f, -1.f }), straight_cost };
+		adjacents[2] = { (void*)findState(pos + core::vector2df{  1.f, -1.f }), diagonal_cost };
+		adjacents[3] = { (void*)findState(pos + core::vector2df{  1.f,  0.f }), straight_cost };
+		adjacents[4] = { (void*)findState(pos + core::vector2df{  1.f,  1.f }), diagonal_cost };
+		adjacents[5] = { (void*)findState(pos + core::vector2df{  0.f,  1.f }), straight_cost };
+		adjacents[6] = { (void*)findState(pos + core::vector2df{ -1.f,  1.f }), diagonal_cost };
+		adjacents[7] = { (void*)findState(pos + core::vector2df{ -1.f,  0.f }), straight_cost };
 	}
 
-	m_micropather = new micropather::MicroPather(this, m_states.size(), 4);
+	m_micropather = new micropather::MicroPather(this, m_states.size(), 8);
 }
 
 Pathfinder::~Pathfinder()
@@ -79,7 +85,7 @@ bool Pathfinder::findClosest(const irr::core::vector2df position, irr::core::vec
 	{
 		if (it.second.place.isPointInside(position))
 		{
-			closest_position = it.first;
+			closest_position = it.second.place.getCenter();
 			return true;
 		}
 	}
@@ -95,15 +101,12 @@ float Pathfinder::LeastCostEstimate(void* stateStart, void* stateEnd)
 void Pathfinder::AdjacentCost(void* state, std::vector<micropather::StateCost>* adjacent)
 {
 	auto adjacents = ((State*)state)->adjacents;
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 8; ++i)
 	{
-		if (adjacents[i] == nullptr)
+		if (adjacents[i].state == nullptr)
 			continue;
 
-		micropather::StateCost cost;
-		cost.cost = 1.f;
-		cost.state = (void*)adjacents[i];
-		adjacent->push_back(cost);
+		adjacent->push_back(adjacents[i]);
 	}
 }
 

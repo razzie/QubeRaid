@@ -31,7 +31,7 @@ private:
 	struct State
 	{
 		irr::core::rectf place;
-		const State* adjacents[4] = { nullptr };
+		micropather::StateCost adjacents[8];
 	};
 
 	std::map<irr::core::vector2df, State> m_states;
