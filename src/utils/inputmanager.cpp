@@ -29,18 +29,21 @@ struct KeyInputEx : KeyInput
 
 struct MouseInputEx : public MouseInput
 {
-	MouseInputEx(const SEvent::SMouseInput& input, core::vector2di delta = {})
+	MouseInputEx(const SEvent::SMouseInput& input, InputManager* mgr = nullptr)
 	{
 		x = input.X;
 		y = input.Y;
-		x_delta = delta.X;
-		y_delta = delta.Y;
+		x_delta = input.X - (mgr ? mgr->getMousePosition().X : 0);
+		y_delta = input.Y - (mgr ? mgr->getMousePosition().Y : 0);
 		wheel = input.Wheel;
 		shift = input.Shift;
 		control = input.Control;
-		left_button = input.isLeftPressed();
-		right_button = input.isRightPressed();
-		middle_button = input.isMiddlePressed();
+		left_button_down = input.isLeftPressed();
+		left_button_clicked = mgr && input.isLeftPressed() && !mgr->isLeftMouseBtnDown();
+		right_button_down = input.isRightPressed();
+		right_button_clicked = mgr && input.isRightPressed() && !mgr->isRightMouseBtnDown();
+		middle_button_down = input.isMiddlePressed();
+		middle_button_clicked = mgr && input.isMiddlePressed() && !mgr->isMiddleMouseBtnDown();
 		consumed = false;
 	}
 };
@@ -82,13 +85,12 @@ bool InputManager::OnEvent(const SEvent& event)
 
 	case EET_MOUSE_INPUT_EVENT:
 		{
-			core::vector2di delta(event.MouseInput.X - m_last_mouse_x, event.MouseInput.Y - m_last_mouse_y);
+			m_app->sendEvent(mouse_event(MouseInputEx(event.MouseInput, this)));
 			m_mousebtn_left = event.MouseInput.isLeftPressed();
 			m_mousebtn_middle = event.MouseInput.isMiddlePressed();
 			m_mousebtn_right = event.MouseInput.isRightPressed();
 			m_last_mouse_x = event.MouseInput.X;
 			m_last_mouse_y = event.MouseInput.Y;
-			m_app->sendEvent(mouse_event(MouseInputEx(event.MouseInput, delta)));
 		}
 		return false;
 

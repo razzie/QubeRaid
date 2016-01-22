@@ -74,7 +74,7 @@ void LevelTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 		const MouseInput* event;
 		e->get(event);
 
-		if (!event->consumed && event->left_button)
+		if (!event->consumed && event->left_button_clicked)
 		{
 			//scene::ICameraSceneNode* cam = m_app->getCamera();
 			//for (auto& node : m_nodes)

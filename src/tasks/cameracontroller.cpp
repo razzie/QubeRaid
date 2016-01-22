@@ -66,7 +66,7 @@ void CameraController::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 	uint32_t elapsedMs = options.getElapsedMs();
 	float speed = static_cast<float>(elapsedMs) / 20.f;
 
-	if (event->right_button)
+	if (event->right_button_down)
 	{
 		core::vector3df pos = cam->getPosition();
 		core::vector3df target = cam->getTarget();

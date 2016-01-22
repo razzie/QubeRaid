@@ -25,10 +25,10 @@ struct KeyInput : public gg::IEvent::Tag<0, KeyInput>
 {
 	wchar_t character;
 	uint16_t key_code; // irr::EKEY_CODE
-	bool pressed_down : 1;
-	bool shift : 1;
-	bool control : 1;
-	mutable volatile bool consumed : 1;
+	unsigned pressed_down : 1;
+	unsigned shift : 1;
+	unsigned control : 1;
+	mutable volatile unsigned consumed : 1;
 };
 
 struct MouseInput;
@@ -39,12 +39,15 @@ struct MouseInput : public gg::IEvent::Tag<0, MouseInput>
 	int32_t x_delta;
 	int32_t y_delta;
 	float wheel;
-	bool shift : 1;
-	bool control : 1;
-	bool left_button : 1;
-	bool right_button : 1;
-	bool middle_button : 1;
-	mutable volatile bool consumed : 1;
+	unsigned shift : 1;
+	unsigned control : 1;
+	unsigned left_button_down : 1;
+	unsigned left_button_clicked : 1;
+	unsigned right_button_down : 1;
+	unsigned right_button_clicked : 1;
+	unsigned middle_button_down : 1;
+	unsigned middle_button_clicked : 1;
+	mutable volatile unsigned consumed : 1;
 };
 
 struct GUIAction;
