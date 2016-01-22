@@ -145,7 +145,8 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 		volatile unsigned char used : 1;
 	};
 
-	core::vector3di level_size(0, 3, 0);
+	const int level_height = 3;
+	core::vector3di level_size(0, level_height, 0);
 	for (auto& island : in_islands)
 	{
 		if (level_size.X < (s32)(island.position.X + island.radius) + 1)
@@ -219,6 +220,7 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 	auto add_block = [&](core::vector3di pos, core::vector3di size)
 	{
 		Level::GroundBlock block;
+		pos.Y -= level_height - 1;
 		block.box.MinEdge = pos;
 		block.box.MaxEdge = pos + size;
 		//block.color = 0xffffffff;

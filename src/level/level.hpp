@@ -12,6 +12,7 @@
 #include <irrlicht.h>
 
 class QubeRaid;
+class Pathfinder;
 
 class Level
 {
@@ -47,12 +48,14 @@ public:
 
 	Level(QubeRaid*);
 	~Level();
+	const Pathfinder* getPathfinder() const;
 	const std::vector<Island>& getIslands() const;
 	const std::vector<Route>& getRoutes() const;
 	const std::vector<GroundBlock>& getGroundBlocks() const;
 
 private:
 	QubeRaid* m_app;
+	Pathfinder* m_pathfinder;
 	irr::core::dimension2du m_size;
 	std::vector<Island> m_islands;
 	std::vector<Route> m_routes;

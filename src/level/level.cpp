@@ -8,6 +8,7 @@
 
 #include "level/level.hpp"
 #include "level/levelgenerator.hpp"
+#include "level/pathfinder.hpp"
 #include "quberaid.hpp"
 
 using namespace irr;
@@ -20,10 +21,18 @@ Level::Level(QubeRaid* app) :
 	gen.generate(LevelGenerator::Pattern::STAR, 6, 0, m_islands, m_routes);
 	gen.optimize(m_islands);
 	gen.generate(m_islands, m_routes, m_ground_blocks);
+
+	m_pathfinder = new Pathfinder(this);
 }
 
 Level::~Level()
 {
+	delete m_pathfinder;
+}
+
+const Pathfinder* Level::getPathfinder() const
+{
+	return m_pathfinder;
 }
 
 const std::vector<Level::Island>& Level::getIslands() const

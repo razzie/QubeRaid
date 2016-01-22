@@ -28,16 +28,16 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blo
 	m_meshbuffer.setHardwareMappingHint(scene::E_HARDWARE_MAPPING::EHM_STATIC);
 	m_meshbuffer.setDirty();
 
-	setPosition( -getBoundingBox().getCenter() );
+	auto center = getBoundingBox().getCenter();
+	setPosition({ -center.X, 0.f, -center.Z });
 
 	scene::ISceneManager* smgr = getSceneManager();
 	for (auto& island : m_app->getLevel()->getIslands())
 	{
-		auto* billboard = smgr->addBillboardSceneNode(this, { 2.f, 2.f }, { island.position.X, 5.f, island.position.Y });
+		auto* billboard = smgr->addBillboardSceneNode(this, { 2.f, 2.f }, { island.position.X, 2.5f, island.position.Y });
 		billboard->setMaterialTexture(0, m_app->getDriver()->getTexture("../assets/home.png"));
 		billboard->setMaterialType(video::E_MATERIAL_TYPE::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
-		billboard->getMaterial(0).Lighting = false;
-		//billboard->drop();
+		billboard->setMaterialFlag(video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
 	}
 }
 
