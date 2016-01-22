@@ -30,14 +30,9 @@ public:
 		world_view_proj *= driver->getTransform(irr::video::ETS_WORLD);
 		services->setVertexShaderConstant("world_view_proj", world_view_proj.pointer(), 16);
 
-		irr::core::vector3df camera_pos = m_smgr->getActiveCamera()->getPosition();
-		services->setVertexShaderConstant("camera_pos", reinterpret_cast<irr::f32*>(&camera_pos), 3);
-
-		irr::core::vector3df light_pos(50.f, 50.f, 0.f);
-		services->setVertexShaderConstant("light_pos", reinterpret_cast<irr::f32*>(&light_pos), 3);
-
-		irr::video::SColorf light_color(1.f, 1.f, 1.f);
-		services->setVertexShaderConstant("light_color", reinterpret_cast<irr::f32*>(&light_color), 4);
+		irr::scene::ICameraSceneNode* cam = m_smgr->getActiveCamera();
+		irr::core::vector3df camera_normal = (cam->getPosition() - cam->getTarget()).normalize();
+		services->setVertexShaderConstant("camera_normal", reinterpret_cast<irr::f32*>(&camera_normal), 3);
 
 		irr::video::SColorf outline_color(0.f, 0.f, 0.f);
 		services->setVertexShaderConstant("outline_color", reinterpret_cast<irr::f32*>(&outline_color), 4);

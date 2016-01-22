@@ -25,16 +25,14 @@ void main(void)
 )";
 
 static const char* ps = R"(
-uniform vec3 camera_pos;
-uniform vec3 light_pos;
-uniform vec4 light_color;
+uniform vec3 camera_normal;
 varying vec3 pos;
 
 void main(void)
 {
 	vec3 normal = normalize(cross(dFdy(pos), dFdx(pos)));
-	vec3 light_normal = normalize(camera_pos);
-	vec4 light = clamp(light_color * dot(light_normal, normal), 0.0, 1.0);
+	vec3 light_normal = camera_normal;
+	vec4 light = clamp(dot(light_normal, normal), 0.0, 1.0);
 	gl_FragColor = gl_Color * light;
 }
 )";

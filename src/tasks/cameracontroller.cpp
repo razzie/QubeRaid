@@ -11,22 +11,24 @@
 #include "events/inputevents.hpp"
 #include "tasks/cameracontroller.hpp"
 
+using namespace irr;
 
-static void rotateAroundCentre(irr::core::vector3df& point, irr::core::vector3df center, irr::core::vector3df rotation)
+
+static void rotateAroundCentre(core::vector3df& point, core::vector3df center, core::vector3df rotation)
 {
 	point -= center;
-	irr::core::matrix4 m;
+	core::matrix4 m;
 	m.setRotationDegrees(rotation);
 	m.rotateVect(point);
 	point += center;
 }
 
-static void rotateVectorAroundAxis(irr::core::vector3df& vector, const irr::core::vector3df& axis, irr::f32 radians)
+static void rotateVectorAroundAxis(core::vector3df& vector, const core::vector3df& axis, f32 radians)
 {
-	irr::core::quaternion q;
-	irr::core::matrix4 m;
+	core::quaternion q;
+	core::matrix4 m;
 	q.fromAngleAxis(radians, axis);
-	q.getMatrix(m, irr::core::vector3df(0, 0, 0));
+	q.getMatrix(m, core::vector3df(0, 0, 0));
 	m.rotateVect(vector);
 }
 
@@ -58,21 +60,21 @@ void CameraController::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 	else
 		event->consumed = true;
 
-	irr::core::vector2di curr_pos(event->x, event->y);
-	irr::core::vector2di delta(event->x_delta, event->y_delta);
-	irr::scene::ICameraSceneNode* cam = m_app->getCamera();
+	core::vector2di curr_pos(event->x, event->y);
+	core::vector2di delta(event->x_delta, event->y_delta);
+	scene::ICameraSceneNode* cam = m_app->getCamera();
 	uint32_t elapsedMs = options.getElapsedMs();
 	float speed = static_cast<float>(elapsedMs) / 20.f;
 
 	if (event->right_button)
 	{
-		irr::core::vector3df pos = cam->getPosition();
-		irr::core::vector3df target = cam->getTarget();
-		irr::core::vector3df right = irr::core::vector3df(0.f, 1.f, 0.f).crossProduct(target - pos);
+		core::vector3df pos = cam->getPosition();
+		core::vector3df target = cam->getTarget();
+		core::vector3df right = core::vector3df(0.f, 1.f, 0.f).crossProduct(target - pos);
 		right.normalize();
 
 		pos -= target;
-		rotateVectorAroundAxis(pos, right, speed * delta.Y * irr::core::DEGTORAD);
+		rotateVectorAroundAxis(pos, right, speed * delta.Y * core::DEGTORAD);
 		pos += target;
 		pos.rotateXZBy(speed * -delta.X, target);
 
@@ -81,14 +83,20 @@ void CameraController::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 
 	if (event->wheel > 0)
 	{
-		irr::core::vector3df cam_pos = cam->getPosition();
+		core::vector3df target = cam->getTarget();
+		core::vector3df cam_pos = cam->getPosition();
+		cam_pos -= target;
 		cam_pos *= 0.9f;
+		cam_pos += target;
 		cam->setPosition(cam_pos);
 	}
 	else if (event->wheel < 0)
 	{
-		irr::core::vector3df cam_pos = cam->getPosition();
+		core::vector3df target = cam->getTarget();
+		core::vector3df cam_pos = cam->getPosition();
+		cam_pos -= target;
 		cam_pos *= 1.1f;
+		cam_pos += target;
 		cam->setPosition(cam_pos);
 	}
 }

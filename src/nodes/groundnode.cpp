@@ -28,8 +28,7 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blo
 	m_meshbuffer.setHardwareMappingHint(scene::E_HARDWARE_MAPPING::EHM_STATIC);
 	m_meshbuffer.setDirty();
 
-	auto center = getBoundingBox().getCenter();
-	setPosition({ -center.X, 0.f, -center.Z });
+	setPosition({ 0.f, -1.f, 0.f });
 
 	scene::ISceneManager* smgr = getSceneManager();
 	for (auto& island : m_app->getLevel()->getIslands())

@@ -68,25 +68,20 @@ void MainTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 
 		if (!event->consumed)
 		{
-			event->consumed = true;
-
 			EKEY_CODE key = static_cast<EKEY_CODE>(event->key_code);
 			switch (key)
 			{
 			case EKEY_CODE::KEY_ESCAPE:
 				options.getThread().finish();
+				event->consumed = true;
 				break;
 
 			case EKEY_CODE::KEY_KEY_R:
 				break;
 
-			case EKEY_CODE::KEY_SPACE:
-				m_cam->setPosition({ 0.f, 50.f, -50.f });
-				m_cam->setTarget({ 0.f, 0.f, 0.f });
-				break;
-
 			case EKEY_CODE::KEY_F12:
 				takeScreenshot(m_device);
+				event->consumed = true;
 				break;
 			}
 		}

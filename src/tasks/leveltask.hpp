@@ -8,11 +8,13 @@
 
 #pragma once
 
+#include <vector>
 #include <irrlicht.h>
 #include <gg/thread.hpp>
 
 class QubeRaid;
 class GroundNode;
+class QuboidNode;
 
 class LevelTask : public gg::ITask
 {
@@ -29,4 +31,7 @@ public:
 private:
 	QubeRaid* m_app;
 	GroundNode* m_ground;
+	std::vector<QuboidNode*> m_quboids;
+
+	void resetCamera();
 };

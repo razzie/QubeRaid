@@ -14,6 +14,7 @@
 #include "tasks/leveltask.hpp"
 #include "tasks/cameracontroller.hpp"
 #include "nodes/groundnode.hpp"
+#include "nodes/quboidnode.hpp"
 #include "utils/perlin.hpp"
 #include "utils/grid.hpp"
 
@@ -27,6 +28,10 @@ LevelTask::LevelTask(QubeRaid* app) :
 	m_app->setLevel(level);
 
 	m_ground = new GroundNode(m_app, level->getGroundBlocks());
+	resetCamera();
+
+	m_quboids.push_back(new QuboidNode(m_app));
+	m_quboids[0]->setPosition({ level->getIslands()[0].position.X, 0.f, level->getIslands()[0].position.Y });
 }
 
 LevelTask::~LevelTask()
@@ -36,29 +41,61 @@ LevelTask::~LevelTask()
 
 void LevelTask::onStart(gg::ITaskOptions& options)
 {
-	//options.subscribe(key_event);
+	options.subscribe(key_event);
+	options.subscribe(mouse_event);
 	//options.getThread().addTask<CameraController, QubeRaid::State::GAME>(m_app);
 }
 
 void LevelTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 {
-	//if (e->is(key_event))
-	//{
-	//	const KeyInput* event;
-	//	e->get(event);
+	if (e->is(key_event))
+	{
+		const KeyInput* event;
+		e->get(event);
 
-	//	if (!event->consumed)
-	//	{
-	//		event->consumed = true;
+		if (!event->consumed)
+		{
+			EKEY_CODE key = static_cast<EKEY_CODE>(event->key_code);
+			switch (key)
+			{
+			case EKEY_CODE::KEY_SPACE:
+				resetCamera();
+				event->consumed = true;
+				break;
 
-	//		EKEY_CODE key = static_cast<EKEY_CODE>(event->key_code);
-	//		switch (key)
-	//		{
-	//		default:
-	//			break;
-	//		}
-	//	}
-	//}
+			default:
+				break;
+			}
+		}
+	}
+
+	if (e->is(mouse_event))
+	{
+		const MouseInput* event;
+		e->get(event);
+
+		if (!event->consumed && event->left_button)
+		{
+			//scene::ICameraSceneNode* cam = m_app->getCamera();
+			//for (auto& node : m_nodes)
+			//{
+			//	core::line3df camline(cam->getPosition(), cam->getTarget());
+			//	if (node->getBoundingBox().intersectsWithLine(camline))
+			//	{
+
+			//	}
+			//}
+
+			core::plane3df plane(core::vector3df(0.f, 0.f, 0.f), core::vector3df(0.f, 1.f, 0.f));
+			core::vector3df intersection;
+			core::line3df ray = m_app->getSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates({ event->x, event->y });
+			if (plane.getIntersectionWithLine(ray.start, ray.end + ray.start, intersection))
+			{
+				m_quboids[0]->walkTo({ intersection.X, intersection.Z });
+				//m_quboids[0]->setPosition(intersection);
+			}
+		}
+	}
 }
 
 void LevelTask::onUpdate(gg::ITaskOptions& options)
@@ -76,4 +113,11 @@ void LevelTask::onError(gg::ITaskOptions& options, std::exception& e)
 
 void LevelTask::onFinish(gg::ITaskOptions& options)
 {
+}
+
+void LevelTask::resetCamera()
+{
+	auto ground_center = m_ground->getBoundingBox().getCenter();
+	m_app->getCamera()->setPosition(ground_center + core::vector3df{ 0.f, 10.f, -10.f });
+	m_app->getCamera()->setTarget(ground_center);
 }

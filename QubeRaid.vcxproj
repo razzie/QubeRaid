@@ -340,6 +340,7 @@
     <ClInclude Include="src\meshes\roundedcubemesh.hpp" />
     <ClInclude Include="src\nodes\groundnode.hpp" />
     <ClInclude Include="src\nodes\basenode.hpp" />
+    <ClInclude Include="src\nodes\quboidnode.hpp" />
     <ClInclude Include="src\tasks\leveltask.hpp" />
     <ClInclude Include="src\tasks\maintask.hpp" />
     <ClInclude Include="src\utils\inputmanager.hpp" />
@@ -364,6 +365,7 @@
     <ClCompile Include="src\meshes\basemesh.cpp" />
     <ClCompile Include="src\nodes\groundnode.cpp" />
     <ClCompile Include="src\nodes\basenode.cpp" />
+    <ClCompile Include="src\nodes\quboidnode.cpp" />
     <ClCompile Include="src\quberaid.cpp" />
     <ClCompile Include="src\tasks\leveltask.cpp" />
     <ClCompile Include="src\tasks\maintask.cpp" />

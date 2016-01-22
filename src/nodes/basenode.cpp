@@ -7,12 +7,13 @@
  */
 
 #include "quberaid.hpp"
+#include "level/level.hpp"
 #include "nodes/basenode.hpp"
 
 using namespace irr;
 
-BaseNode::BaseNode(QubeRaid* app, scene::ISceneNode* parent) :
-	scene::ISceneNode(parent ? parent : app->getSceneManager()->getRootSceneNode(), app->getSceneManager()),
+BaseNode::BaseNode(QubeRaid* app) :
+	scene::ISceneNode(app->getSceneManager()->getRootSceneNode(), app->getSceneManager()),
 	m_app(app),
 	m_vertices(video::EVT_STANDARD),
 	m_indices(video::EIT_16BIT),

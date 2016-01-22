@@ -15,7 +15,7 @@ class QubeRaid;
 class BaseNode : public irr::scene::ISceneNode
 {
 public:
-	BaseNode(QubeRaid*, irr::scene::ISceneNode* parent = nullptr);
+	BaseNode(QubeRaid*);
 	virtual ~BaseNode();
 	virtual void OnRegisterSceneNode();
 	virtual void render();
