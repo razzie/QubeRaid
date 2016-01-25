@@ -19,7 +19,8 @@ varying vec3 norm;
 
 void main(void)
 {
-	gl_Position = world_view_proj * gl_Vertex;
+	vec4 n = normalize(vec4(gl_Normal.x, gl_Normal.y, gl_Normal.z, 0.0));
+	gl_Position = world_view_proj * (gl_Vertex - (n * 0.1));
 	gl_FrontColor = gl_Color;
 	pos = (world * gl_Vertex).xyz;
 	norm = gl_Normal;

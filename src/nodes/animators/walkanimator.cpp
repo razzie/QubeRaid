@@ -69,7 +69,7 @@ void WalkAnimator::animateNode(scene::ISceneNode* node, u32 timeMs)
 			path.m_end_time > elapsed)
 		{
 			core::vector2df pos = path.getPointByTime(elapsed);
-			node->setPosition({ pos.X, 0.25f * (f32)std::sin(0.025f * timeMs), pos.Y });
+			node->setPosition({ pos.X, 0.25f * (f32)std::sin(0.025f * timeMs) + 0.25f, pos.Y });
 			return;
 		}
 	}

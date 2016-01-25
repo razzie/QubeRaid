@@ -18,12 +18,11 @@ BaseNode::BaseNode(QubeRaid* app) :
 	m_vertices(video::EVT_STANDARD),
 	m_indices(video::EIT_16BIT),
 	m_meshbuffer(video::EVT_STANDARD, video::EIT_16BIT),
-	m_outline_material(*app->getResources()->get<video::SMaterial>("material_outline")),
-	m_outline_color(0xff000000),
-	m_outline(false)
+	m_outline_material(*app->getResources()->get<video::SMaterial>("material_outline"))
 {
 	m_meshbuffer.setVertexBuffer(&m_vertices);
 	m_meshbuffer.setIndexBuffer(&m_indices);
+	setOutline(false);
 }
 
 BaseNode::~BaseNode()
@@ -72,5 +71,5 @@ video::SMaterial& BaseNode::getMaterial(u32 i)
 void BaseNode::setOutline(bool enabled, video::SColor color)
 {
 	m_outline = enabled;
-	m_outline_color = color;
+	*reinterpret_cast<u32*>(&m_outline_material.MaterialTypeParam) = color.color;
 }

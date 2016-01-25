@@ -31,6 +31,5 @@ protected:
 	irr::scene::CDynamicMeshBuffer m_meshbuffer;
 	irr::video::SMaterial m_material;
 	irr::video::SMaterial m_outline_material;
-	irr::video::SColor m_outline_color;
 	bool m_outline;
 };

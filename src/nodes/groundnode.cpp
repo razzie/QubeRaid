@@ -16,7 +16,7 @@ using namespace irr;
 GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blocks) :
 	BaseNode(app)
 {
-	setOutline(true);
+	setOutline(true, 0xff446644);
 	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
 
 	for (auto& block : blocks)
