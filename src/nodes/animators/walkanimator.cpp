@@ -16,25 +16,20 @@ WalkAnimator::WalkAnimator(scene::ISceneNode* node, const std::vector<core::vect
 	m_node(node),
 	m_start_time(0)
 {
-	const float speed = 5.0f;
-
-	m_path.clear();
-	m_path.reserve(path.size());
-
 	if (path.size() == 0) return;
+
+	const float speed = 200.0f;
+
+	m_path.reserve(path.size());
 
 	for (unsigned i = 0; i < path.size() - 1; ++i)
 	{
 		Path p;
-
 		p.m_start_point = path[i];
 		p.m_end_point = path[i + 1];
-		float dist = p.m_start_point.getDistanceFrom(p.m_end_point); // distance in units
-
+		float dist = p.m_start_point.getDistanceFrom(p.m_end_point);
 		p.m_start_time = ((i == 0) ? 0 : (m_path[i - 1].m_end_time));
-		p.m_end_time = p.m_start_time + (u32)((1000.f * dist) / speed); // x speed: x units / 1000 msec
-
-		//p.m_velocity = (p.m_start_point - p.m_end_point) / ((float)p.m_end_time - (float)p.m_start_time);
+		p.m_end_time = p.m_start_time + (u32)(dist * speed);
 
 		m_path.push_back(p);
 	}
@@ -60,8 +55,8 @@ void WalkAnimator::animateNode(scene::ISceneNode* node, u32 timeMs)
 		m_start_time = timeMs;
 
 	u32 elapsed = timeMs - m_start_time;
-
-	uint32_t travel_interval = m_path[m_path.size() - 1].m_end_time;
+	u32 travel_interval = m_path[m_path.size() - 1].m_end_time;
+	f32 jump = 0.25f * (f32)std::sin(0.025f * elapsed) + 0.25f;
 
 	for (auto& path : m_path)
 	{
@@ -69,12 +64,17 @@ void WalkAnimator::animateNode(scene::ISceneNode* node, u32 timeMs)
 			path.m_end_time > elapsed)
 		{
 			core::vector2df pos = path.getPointByTime(elapsed);
-			node->setPosition({ pos.X, 0.25f * (f32)std::sin(0.025f * timeMs) + 0.25f, pos.Y });
+			node->setPosition({ pos.X, jump, pos.Y });
 			return;
 		}
 	}
 
-	node->removeAnimator(this);
+	auto pos = node->getPosition();
+	pos.Y = jump;
+	node->setPosition(pos);
+
+	if (pos.Y < 0.2f)
+		node->removeAnimator(this);
 }
 
 scene::ISceneNodeAnimator* WalkAnimator::createClone(scene::ISceneNode* node, scene::ISceneManager* newManager)

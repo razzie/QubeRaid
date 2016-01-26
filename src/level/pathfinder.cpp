@@ -7,6 +7,7 @@
  */
 
 #include <cmath>
+#include <random>
 #include <gg/logger.hpp>
 #include "level/level.hpp"
 #include "level/pathfinder.hpp"
@@ -74,8 +75,17 @@ bool Pathfinder::getPath(const core::vector2df start, const core::vector2df end,
 	if (rc != micropather::MicroPather::SOLVED)
 		return false;
 
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<f32> dis(-0.25f, 0.25f);
+
 	for (void* state : path)
-		path_steps.push_back(((State*)state)->place.getCenter());
+	{
+		core::vector2df pos = ((State*)state)->place.getCenter();
+		pos.X += dis(gen);
+		pos.Y += dis(gen);
+		path_steps.push_back(pos);
+	}
 	return true;
 }
 
