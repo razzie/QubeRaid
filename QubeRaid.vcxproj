@@ -363,6 +363,7 @@
     <ClCompile Include="src\materials\flatmaterial.cpp" />
     <ClCompile Include="src\materials\groundmaterial.cpp" />
     <ClCompile Include="src\materials\outlinematerial.cpp" />
+    <ClCompile Include="src\materials\shadercallback.cpp" />
     <ClCompile Include="src\meshes\basemesh.cpp" />
     <ClCompile Include="src\nodes\animators\walkanimator.cpp" />
     <ClCompile Include="src\nodes\groundnode.cpp" />

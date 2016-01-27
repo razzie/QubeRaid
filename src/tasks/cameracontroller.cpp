@@ -64,7 +64,7 @@ void CameraController::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 	core::vector2di delta(event->x_delta, event->y_delta);
 	scene::ICameraSceneNode* cam = m_app->getCamera();
 	uint32_t elapsedMs = options.getElapsedMs();
-	float speed = static_cast<float>(elapsedMs) / 20.f;
+	float speed = static_cast<float>(elapsedMs) / 40.f;
 
 	if (event->right_button_down)
 	{

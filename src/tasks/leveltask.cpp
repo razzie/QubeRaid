@@ -31,7 +31,7 @@ LevelTask::LevelTask(QubeRaid* app) :
 	resetCamera();
 
 	m_quboids.push_back(new QuboidNode(m_app));
-	m_quboids[0]->setPosition({ level->getIslands()[0].position.X, 0.f, level->getIslands()[0].position.Y });
+	m_quboids[0]->setPosition({ level->getIslands()[0].position.X + 2.f, 0.f, level->getIslands()[0].position.Y });
 }
 
 LevelTask::~LevelTask()
@@ -76,23 +76,12 @@ void LevelTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 
 		if (!event->consumed && event->left_button_clicked)
 		{
-			//scene::ICameraSceneNode* cam = m_app->getCamera();
-			//for (auto& node : m_nodes)
-			//{
-			//	core::line3df camline(cam->getPosition(), cam->getTarget());
-			//	if (node->getBoundingBox().intersectsWithLine(camline))
-			//	{
-
-			//	}
-			//}
-
 			core::plane3df plane(core::vector3df(0.f, 0.f, 0.f), core::vector3df(0.f, 1.f, 0.f));
 			core::vector3df intersection;
 			core::line3df ray = m_app->getSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates({ event->x, event->y });
 			if (plane.getIntersectionWithLine(ray.start, ray.end + ray.start, intersection))
 			{
 				m_quboids[0]->walkTo({ intersection.X, intersection.Z });
-				//m_quboids[0]->setPosition(intersection);
 			}
 		}
 	}

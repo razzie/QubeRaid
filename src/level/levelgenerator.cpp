@@ -178,9 +178,8 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 	grid.foreach([&](GridData* data, size_t x, size_t y, size_t z)
 	{
 		core::vector2df p((f32)x, (f32)z);
-		float n = noise(0.125f * x, 0.125f * y, 0.125f * z) + (is_solid(p) ? 0.35f : -0.35f);
+		float n = noise(0.125f * x, 0.125f * y, 0.125f * z) + (is_solid(p) ? 0.5f : -0.25f);
 		data->solid = n > 0.f;
-		//data->solid = is_solid(p);
 		data->used = false;
 	});
 
@@ -215,17 +214,17 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<u32> dis(128, 255);
+	std::uniform_int_distribution<u32> dis(192, 255);
 
 	auto add_block = [&](core::vector3di pos, core::vector3di size)
 	{
 		Level::GroundBlock block;
-		pos.Y -= level_height - 1;
+		pos.Y -= level_height;
 		block.box.MinEdge = pos;
 		block.box.MaxEdge = pos + size;
 		//block.color = 0xffffffff;
-		u32 color = dis(gen);
-		block.color = video::SColor(255, color, 255, color);
+		u32 color = dis(gen) + ((pos.Y + 1) * 48);
+		block.color = video::SColor(255, color, color, color);
 		out_ground_blocks.push_back(block);
 	};
 

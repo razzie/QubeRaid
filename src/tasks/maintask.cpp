@@ -94,7 +94,8 @@ void MainTask::onUpdate(gg::ITaskOptions& options)
 	{
 		//m_driver->beginScene(true, true, { 255, 128, 196, 255 });
 		//m_driver->beginScene(true, true, { 255, 196, 196, 196 });
-		m_driver->beginScene(true, true, { 255, 255, 255, 255 });
+		m_driver->beginScene(true, true, { 255, 96, 96, 96 });
+		//m_driver->beginScene(true, true, { 255, 255, 255, 255 });
 		m_smgr->drawAll();
 
 		/*m_driver->setMaterial(m_app->getFactory()->getLineMaterial());

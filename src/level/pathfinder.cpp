@@ -19,7 +19,7 @@ Pathfinder::Pathfinder(const Level* level)
 {
 	for (auto& block : level->getGroundBlocks())
 	{
-		if (block.box.MinEdge.Y != 0)
+		if (block.box.MaxEdge.Y != 0)
 			continue;
 
 		core::dimension2di size(block.box.getExtent().X, block.box.getExtent().Z);

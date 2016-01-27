@@ -39,7 +39,7 @@ void main(void)
 	
 	vec4 light = clamp(dot(light_normal, normal), 0.0, 1.0);
 	
-	gl_FragColor = (light * 0.5) + (gl_Color * 0.5);
+	gl_FragColor = (light * 0.25) + (gl_Color * 0.75);
 }
 )";
 

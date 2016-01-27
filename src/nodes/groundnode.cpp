@@ -16,7 +16,7 @@ using namespace irr;
 GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blocks) :
 	BaseNode(app)
 {
-	setOutline(true, 0xff446644);
+	setOutline(true, 0xff444444);
 	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
 
 	for (auto& block : blocks)
@@ -28,12 +28,10 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blo
 	m_meshbuffer.setHardwareMappingHint(scene::E_HARDWARE_MAPPING::EHM_STATIC);
 	m_meshbuffer.setDirty();
 
-	setPosition({ 0.f, -1.f, 0.f });
-
 	scene::ISceneManager* smgr = getSceneManager();
 	for (auto& island : m_app->getLevel()->getIslands())
 	{
-		auto* billboard = smgr->addBillboardSceneNode(this, { 2.f, 2.f }, { island.position.X, 2.5f, island.position.Y });
+		auto* billboard = smgr->addBillboardSceneNode(this, { 2.f, 2.f }, { island.position.X, 1.0f, island.position.Y });
 		billboard->setMaterialTexture(0, m_app->getDriver()->getTexture("../assets/home.png"));
 		billboard->setMaterialType(video::E_MATERIAL_TYPE::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
 		billboard->setMaterialFlag(video::E_MATERIAL_FLAG::EMF_LIGHTING, false);

@@ -755,5 +755,8 @@
     <ClCompile Include="src\nodes\animators\walkanimator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\shadercallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
