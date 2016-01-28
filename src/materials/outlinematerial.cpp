@@ -12,16 +12,18 @@ using namespace irr;
 
 
 static const char* vs = R"(
+#version 110
 uniform mat4 world_view_proj;
 
 void main(void)
 {
-	vec4 norm = normalize(vec4(gl_Normal.x, gl_Normal.y, gl_Normal.z, 0.0));
+	vec4 norm = normalize(vec4(gl_Normal, 0.0));
 	gl_Position = world_view_proj * (gl_Vertex + (norm * 0.05));
 }
 )";
 
 static const char* ps = R"(
+#version 110
 uniform vec4 outline_color;
 
 void main(void)

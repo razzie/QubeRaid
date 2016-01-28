@@ -20,8 +20,8 @@ BaseMaterial::BaseMaterial(QubeRaid* app, const char* vs, const char* ps)
 	ShaderCallback* shader_cb = new ShaderCallback(smgr);
 
 	MaterialType = (video::E_MATERIAL_TYPE)gpu->addHighLevelShaderMaterial(
-		(const c8*)vs, "main", video::EVST_VS_1_1,
-		(const c8*)ps, "main", video::EPST_PS_1_1,
+		(const c8*)vs, "main", video::EVST_VS_2_0,
+		(const c8*)ps, "main", video::EPST_PS_2_0,
 		shader_cb);
 }
 
