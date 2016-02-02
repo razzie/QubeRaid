@@ -326,6 +326,36 @@
     <ClInclude Include="src\3rd\irrlicht\vector2d.h" />
     <ClInclude Include="src\3rd\irrlicht\vector3d.h" />
     <ClInclude Include="src\3rd\micropather\micropather.h" />
+    <ClInclude Include="src\3rd\randomlib\Config.h" />
+    <ClInclude Include="src\3rd\randomlib\DiscreteNormal.hpp" />
+    <ClInclude Include="src\3rd\randomlib\DiscreteNormalAlt.hpp" />
+    <ClInclude Include="src\3rd\randomlib\ExactExponential.hpp" />
+    <ClInclude Include="src\3rd\randomlib\ExactNormal.hpp" />
+    <ClInclude Include="src\3rd\randomlib\ExactPower.hpp" />
+    <ClInclude Include="src\3rd\randomlib\ExponentialDistribution.hpp" />
+    <ClInclude Include="src\3rd\randomlib\ExponentialProb.hpp" />
+    <ClInclude Include="src\3rd\randomlib\InverseEProb.hpp" />
+    <ClInclude Include="src\3rd\randomlib\InversePiProb.hpp" />
+    <ClInclude Include="src\3rd\randomlib\LeadingZeros.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRExponential.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRExponentialL.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRNormal.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRNormalK.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRNormalR.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRRandom.hpp" />
+    <ClInclude Include="src\3rd\randomlib\MPFRUniform.hpp" />
+    <ClInclude Include="src\3rd\randomlib\NormalDistribution.hpp" />
+    <ClInclude Include="src\3rd\randomlib\Random.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomAlgorithm.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomCanonical.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomEngine.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomMixer.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomNumber.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomPower2.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomSeed.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomSelect.hpp" />
+    <ClInclude Include="src\3rd\randomlib\RandomType.hpp" />
+    <ClInclude Include="src\3rd\randomlib\UniformInteger.hpp" />
     <ClInclude Include="src\events\inputevents.hpp" />
     <ClInclude Include="src\level\level.hpp" />
     <ClInclude Include="src\level\levelgenerator.hpp" />
@@ -354,6 +384,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\3rd\micropather\micropather.cpp" />
+    <ClCompile Include="src\3rd\randomlib\Random.cpp" />
     <ClCompile Include="src\events\inputevents.cpp" />
     <ClCompile Include="src\level\level.cpp" />
     <ClCompile Include="src\level\levelgenerator.cpp" />
