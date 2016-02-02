@@ -44,7 +44,7 @@ void ShaderCallback::OnSetConstants(video::IMaterialRendererServices* services, 
 	services->setVertexShaderConstant("camera_position", reinterpret_cast<f32*>(&camera_position), 3);
 	services->setVertexShaderConstant("camera_normal", reinterpret_cast<f32*>(&camera_normal), 3);
 
-	f32 time = 0.001f * (f32)m_timer.getElapsed();
+	f32 time = 0.001f * (f32)m_timer.peekElapsed();
 	services->setVertexShaderConstant("time", reinterpret_cast<f32*>(&time), 1);
 
 	services->setVertexShaderConstant("outline_color", reinterpret_cast<f32*>(&m_outline), 4);

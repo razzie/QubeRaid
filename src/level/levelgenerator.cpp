@@ -214,7 +214,7 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<u32> dis(192, 255);
+	std::uniform_int_distribution<u32> dis(160, 255);
 
 	auto add_block = [&](core::vector3di pos, core::vector3di size)
 	{
@@ -223,7 +223,7 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 		block.box.MinEdge = pos;
 		block.box.MaxEdge = pos + size;
 		//block.color = 0xffffffff;
-		u32 color = dis(gen) + ((pos.Y + 1) * 48);
+		u32 color = dis(gen) + ((pos.Y + size.Y) * 64);
 		block.color = video::SColor(255, color, color, color);
 		out_ground_blocks.push_back(block);
 	};
@@ -235,8 +235,10 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 
 		core::vector3di pos((int)x, (int)y, (int)z);
 
-		if (find_block(pos, { 3, 2, 3 }))
-			add_block(pos, { 3, 2, 3 });
+		if (dis(gen) % 2 && find_block(pos, { 3, 1, 2 }))
+			add_block(pos, { 3, 1, 2 });
+		else if (dis(gen) % 2 && find_block(pos, { 2, 1, 3 }))
+			add_block(pos, { 2, 1, 3 });
 		else if (find_block(pos, { 2, 1, 2 }))
 			add_block(pos, { 2, 1, 2 });
 		else if (data->solid)

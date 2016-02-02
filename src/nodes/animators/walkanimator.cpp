@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include "nodes/animators/walkanimator.hpp"
+#include "nodes/groundnode.hpp"
 
 using namespace irr;
 
@@ -64,16 +65,17 @@ void WalkAnimator::animateNode(scene::ISceneNode* node, u32 timeMs)
 			path.m_end_time > elapsed)
 		{
 			core::vector2df pos = path.getPointByTime(elapsed);
-			node->setPosition({ pos.X, jump, pos.Y });
+			node->setPosition({ pos.X, GroundNode::getHeight(pos) + jump, pos.Y });
 			return;
 		}
 	}
 
 	auto pos = node->getPosition();
-	pos.Y = jump;
+	auto height = GroundNode::getHeight({ pos.X, pos.Z });
+	pos.Y = height + jump;
 	node->setPosition(pos);
 
-	if (pos.Y < 0.2f)
+	if (pos.Y < height + 0.2f)
 		node->removeAnimator(this);
 }
 

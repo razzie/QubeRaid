@@ -31,7 +31,9 @@ LevelTask::LevelTask(QubeRaid* app) :
 	resetCamera();
 
 	m_quboids.push_back(new QuboidNode(m_app));
-	m_quboids[0]->setPosition({ level->getIslands()[0].position.X + 2.f, 0.f, level->getIslands()[0].position.Y });
+	auto pos = level->getIslands()[0].position;
+	pos.X += 2.f;
+	m_quboids[0]->setPosition({ pos.X, m_ground->getHeight(pos), pos.Y });
 }
 
 LevelTask::~LevelTask()

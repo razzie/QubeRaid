@@ -21,6 +21,8 @@ public:
 	GroundNode(QubeRaid*, const std::vector<Level::GroundBlock>& blocks);
 	virtual ~GroundNode();
 
+	static irr::f32 getHeight(irr::core::vector2df pos);
+
 private:
 	void addBlock(const Level::GroundBlock&);
 };
