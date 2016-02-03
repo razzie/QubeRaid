@@ -7,7 +7,8 @@
  */
 
 #include <cmath>
-#include <random>
+//#include <random>
+#include <randomlib/Random.hpp>
 #include "levelgenerator.hpp"
 #include "utils/perlin.hpp"
 #include "utils/grid.hpp"
@@ -15,7 +16,7 @@
 using namespace irr;
 
 
-LevelGenerator::LevelGenerator(unsigned seed) :
+LevelGenerator::LevelGenerator(uint32_t seed) :
 	m_seed(seed)
 {
 }
@@ -212,9 +213,12 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 		return true;
 	};
 
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<u32> dis(160, 255);
+	//std::random_device rd;
+	//std::mt19937 gen(rd());
+	//std::uniform_int_distribution<u32> dis(160, 255);
+	RandomLib::Random gen;
+	gen.Reseed(m_seed);
+	auto dis = [](RandomLib::Random& r)->u32 {return r.IntegerC(160, 255); };
 
 	auto add_block = [&](core::vector3di pos, core::vector3di size)
 	{

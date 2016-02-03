@@ -8,11 +8,13 @@
 
 #pragma once
 
+#include <cstdint>
+
 template<int GRID_SIZE>
 class PerlinNoise
 {
 public:
-	PerlinNoise(unsigned int seed) :
+	PerlinNoise(uint32_t seed) :
 		p(nullptr), rndState(seed)
 	{
 		initPermutation();
@@ -80,7 +82,7 @@ private:
 		return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 	}
 
-	unsigned int rand()
+	uint32_t rand()
 	{
 		rndState = (1664525 * rndState + 1013904223);
 		return (rndState >> 16) % GRID_SIZE;
@@ -96,8 +98,8 @@ private:
 		return a + t*(b - a);
 	}
 
-	unsigned int rndState;
-	unsigned int* p;
+	uint32_t rndState;
+	uint32_t* p;
 };
 
 template<class NOISE_FUNC>
