@@ -15,27 +15,30 @@ static const char* vs = R"(
 #version 110
 uniform mat4 world;
 uniform mat4 world_view_proj;
+varying vec3 pos;
 varying vec3 norm;
 
 void main(void)
 {
 	gl_Position = world_view_proj * gl_Vertex;
 	gl_FrontColor = gl_Color;
+	pos = (world * gl_Vertex).xyz;
 	norm = gl_Normal;
 }
 )";
 
 static const char* ps = R"(
 #version 110
-uniform vec3 camera_normal;
+uniform vec3 camera_position;
+varying vec3 pos;
 varying vec3 norm;
 
 void main(void)
 {
 	vec3 normal = normalize(norm);
-	vec3 light_normal = camera_normal;
-	vec4 light = vec4(clamp(dot(light_normal, normal), 0.0, 1.0));
-	gl_FragColor = (light * 0.25) + (gl_Color * 0.75);
+	vec3 light_normal = normalize(camera_position - pos);
+	float light = floor(clamp(dot(light_normal, normal), 0.0, 1.0) * 4.0) / 4.0;
+	gl_FragColor = (vec4(light) * 0.2) + (gl_Color * 0.8);
 }
 )";
 

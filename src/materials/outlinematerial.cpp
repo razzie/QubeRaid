@@ -18,7 +18,7 @@ uniform mat4 world_view_proj;
 void main(void)
 {
 	vec4 norm = normalize(vec4(gl_Normal, 0.0));
-	gl_Position = world_view_proj * (gl_Vertex + (norm * 0.05));
+	gl_Position = world_view_proj * (gl_Vertex + (norm * 0.1));
 }
 )";
 

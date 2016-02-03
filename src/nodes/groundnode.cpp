@@ -28,8 +28,10 @@ GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blo
 
 	for (size_t i = 0, n = m_vertices.size(); i < n; ++i)
 	{
-		auto& pos = m_vertices[i].Pos;
-		pos.Y += getHeight({ pos.X, pos.Z });
+		auto& v = m_vertices[i];
+		uint8_t color = 255 + (uint8_t)(v.Pos.Y * 80.f);
+		v.Color = video::SColor(255, color, color, color);
+		v.Pos.Y += getHeight({ v.Pos.X, v.Pos.Z });
 	}
 
 	m_meshbuffer.recalculateBoundingBox();
@@ -52,7 +54,7 @@ GroundNode::~GroundNode()
 
 f32 GroundNode::getHeight(core::vector2df pos)
 {
-	return (std::sin(pos.X * 0.15f) + std::cos(pos.Y * 0.15f));
+	return (std::sin(pos.X * 0.15f) + std::cos(pos.Y * 0.15f)) * 1.2f;
 }
 
 void GroundNode::addBlock(const Level::GroundBlock& block)
@@ -62,7 +64,7 @@ void GroundNode::addBlock(const Level::GroundBlock& block)
 
 	core::vector3df fpos((f32)pos.X, (f32)pos.Y, (f32)pos.Z);
 	core::vector3df fsize((f32)size.X, (f32)size.Y, (f32)size.Z);
-	fsize -= core::vector3df(0.1f);
+	fsize -= core::vector3df(0.2f);
 
 	RoundedCubeMesh().append(&m_meshbuffer, fpos, fsize, block.color);
 }

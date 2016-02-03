@@ -34,7 +34,7 @@ void LevelGenerator::generate(Pattern pattern, unsigned islands, unsigned tiny_i
 		if (islands_sum < 1)
 			return;
 
-		float level_radius = 20.f + (islands * 10.f) + (tiny_islands * 5.f);
+		float level_radius = 20.f + (islands * 15.f) + (tiny_islands * 10.f);
 		float island_angle = 360.f / (islands_sum - 1);
 		core::vector2df center(level_radius * 0.5f, level_radius * 0.5f);
 
@@ -42,7 +42,7 @@ void LevelGenerator::generate(Pattern pattern, unsigned islands, unsigned tiny_i
 		center_island.position = center;
 		if (islands > 0)
 		{
-			center_island.radius = 5.f;
+			center_island.radius = 7.5f;
 			--islands;
 			--islands_sum;
 		}
@@ -66,7 +66,7 @@ void LevelGenerator::generate(Pattern pattern, unsigned islands, unsigned tiny_i
 			if (islands > tiny_islands)
 			{
 				--islands;
-				island.radius = 5.f;
+				island.radius = 7.5f;
 			}
 			else
 			{
@@ -96,7 +96,7 @@ void LevelGenerator::generate(Pattern pattern, unsigned islands, unsigned tiny_i
 		if (islands_sum < 1)
 			return;
 
-		float level_radius = 20.f + (islands * 10.f) + (tiny_islands * 5.f);
+		float level_radius = 20.f + (islands * 15.f) + (tiny_islands * 10.f);
 		float island_angle = 360.f / islands_sum;
 		core::vector2df center(level_radius * 0.5f, level_radius * 0.5f);
 
@@ -112,7 +112,7 @@ void LevelGenerator::generate(Pattern pattern, unsigned islands, unsigned tiny_i
 			if (islands > tiny_islands)
 			{
 				--islands;
-				island.radius = 5.f;
+				island.radius = 7.5f;
 			}
 			else
 			{
@@ -179,7 +179,7 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 	grid.foreach([&](GridData* data, size_t x, size_t y, size_t z)
 	{
 		core::vector2df p((f32)x, (f32)z);
-		float n = noise(0.125f * x, 0.125f * y, 0.125f * z) + (is_solid(p) ? 0.5f : -0.25f);
+		float n = noise(0.125f * x, 0.25f * y, 0.125f * z) + (is_solid(p) ? 0.75f : -0.25f);
 		data->solid = n > 0.f;
 		data->used = false;
 	});
@@ -227,7 +227,7 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 		block.box.MinEdge = pos;
 		block.box.MaxEdge = pos + size;
 		//block.color = 0xffffffff;
-		u32 color = dis(gen) + ((pos.Y + size.Y) * 64);
+		u32 color = dis(gen);// +((pos.Y + size.Y) * 64);
 		block.color = video::SColor(255, color, color, color);
 		out_ground_blocks.push_back(block);
 	};

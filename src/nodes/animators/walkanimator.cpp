@@ -75,7 +75,7 @@ void WalkAnimator::animateNode(scene::ISceneNode* node, u32 timeMs)
 	pos.Y = height + jump;
 	node->setPosition(pos);
 
-	if (pos.Y < height + 0.2f)
+	if (pos.Y < height + 0.1f)
 		node->removeAnimator(this);
 }
 

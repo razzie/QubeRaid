@@ -91,6 +91,9 @@ void LevelTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 
 void LevelTask::onUpdate(gg::ITaskOptions& options)
 {
+	//auto target_pos = m_quboids[0]->getPosition();
+	//target_pos.Y = 0.f;
+	//m_app->getCamera()->setTarget(target_pos);
 }
 
 void LevelTask::onStateChange(gg::ITaskOptions& options, gg::IThread::State old_state, gg::IThread::State new_state)
