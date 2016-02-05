@@ -23,7 +23,7 @@ void main(void)
 	gl_Position = world_view_proj * gl_Vertex;
 	gl_FrontColor = gl_Color;
 	pos = (world * gl_Vertex).xyz;
-	norm = gl_Normal;
+	norm = gl_Normal.xyz;
 }
 )";
 

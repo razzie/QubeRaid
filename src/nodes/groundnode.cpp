@@ -64,7 +64,6 @@ void GroundNode::addBlock(const Level::GroundBlock& block)
 
 	core::vector3df fpos((f32)pos.X, (f32)pos.Y, (f32)pos.Z);
 	core::vector3df fsize((f32)size.X, (f32)size.Y, (f32)size.Z);
-	fsize -= core::vector3df(0.2f);
 
 	RoundedCubeMesh().append(&m_meshbuffer, fpos, fsize, block.color);
 }

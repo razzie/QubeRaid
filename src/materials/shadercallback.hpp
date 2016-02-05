@@ -16,11 +16,9 @@ class ShaderCallback : public irr::video::IShaderConstantSetCallBack
 public:
 	ShaderCallback(irr::scene::ISceneManager* smgr);
 	virtual ~ShaderCallback();
-	virtual void OnSetMaterial(const irr::video::SMaterial& material);
 	virtual void OnSetConstants(irr::video::IMaterialRendererServices* services, irr::s32 userData);
 
-private:
+protected:
 	irr::scene::ISceneManager* m_smgr;
 	gg::Timer m_timer;
-	irr::video::SColorf m_outline;
 };

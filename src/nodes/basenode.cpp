@@ -68,8 +68,10 @@ video::SMaterial& BaseNode::getMaterial(u32 i)
 	return m_material;
 }
 
-void BaseNode::setOutline(bool enabled, video::SColor color)
+void BaseNode::setOutline(bool enabled, f32 thickness, f32 offset, video::SColor color)
 {
 	m_outline = enabled;
+	m_outline_material.Thickness = thickness;
 	*reinterpret_cast<u32*>(&m_outline_material.MaterialTypeParam) = color.color;
+	m_outline_material.MaterialTypeParam2 = offset;
 }

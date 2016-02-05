@@ -19,10 +19,10 @@ using namespace irr;
 QuboidNode::QuboidNode(QubeRaid* app) :
 	BaseNode(app)
 {
-	setOutline(true, 0xff000000);
+	setOutline(true, 0.75f, 0.05f, 0xff000000);
 	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
 
-	RoundedCubeMesh().append(&m_meshbuffer, { -0.25f, 0.f, -0.25f }, { 0.5f, 0.5f, 0.5f }, 0xffff6666);
+	RoundedCubeMesh().append(&m_meshbuffer, { -0.25f, 0.2f, -0.25f }, { 0.5f, 0.5f, 0.5f }, 0xffff6666);
 
 	m_meshbuffer.recalculateBoundingBox();
 	m_meshbuffer.setHardwareMappingHint(scene::E_HARDWARE_MAPPING::EHM_STATIC);

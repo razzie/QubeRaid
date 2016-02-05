@@ -22,7 +22,7 @@ public:
 	virtual const irr::core::aabbox3d<irr::f32>& getBoundingBox() const;
 	virtual irr::u32 getMaterialCount() const;
 	virtual irr::video::SMaterial& getMaterial(irr::u32 i);
-	void setOutline(bool, irr::video::SColor = 0xff000000);
+	void setOutline(bool, irr::f32 thickness = 1.f, irr::f32 offset = 1.f, irr::video::SColor = 0xff000000);
 
 protected:
 	QubeRaid* m_app;

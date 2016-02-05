@@ -15,6 +15,6 @@ class QubeRaid;
 class BaseMaterial : public irr::video::SMaterial
 {
 public:
-	BaseMaterial(QubeRaid*, const char* vs, const char* ps);
+	BaseMaterial(QubeRaid*, const char* vs, const char* ps, irr::video::IShaderConstantSetCallBack* = nullptr);
 	~BaseMaterial();
 };
