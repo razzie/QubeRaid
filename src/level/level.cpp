@@ -21,6 +21,7 @@ Level::Level(QubeRaid* app) :
 	gen.generate(LevelGenerator::Pattern::STAR, 6, 0, m_islands, m_routes);
 	gen.optimize(m_islands);
 	gen.generate(m_islands, m_routes, m_ground_blocks);
+	gen.generate(m_ground_blocks, m_ground_platforms);
 
 	m_pathfinder = new Pathfinder(this);
 }
@@ -48,4 +49,9 @@ const std::vector<Level::Route>& Level::getRoutes() const
 const std::vector<Level::GroundBlock>& Level::getGroundBlocks() const
 {
 	return m_ground_blocks;
+}
+
+const std::vector<Level::GroundPlatform>& Level::getGroundPlatforms() const
+{
+	return m_ground_platforms;
 }

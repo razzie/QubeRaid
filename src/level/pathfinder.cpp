@@ -17,23 +17,13 @@ using namespace irr;
 
 Pathfinder::Pathfinder(const Level* level)
 {
-	for (auto& block : level->getGroundBlocks())
+	for (auto& platform : level->getGroundPlatforms())
 	{
-		if (block.box.MaxEdge.Y != 0)
-			continue;
-
-		core::dimension2di size(block.box.getExtent().X, block.box.getExtent().Z);
-		for (int x = 0; x < size.Width; ++x)
-		{
-			for (int y = 0; y < size.Height; ++y)
-			{
-				core::vector2df pos((f32)(x + block.box.MinEdge.X), (f32)(y + block.box.MinEdge.Z));
-
-				State state;
-				state.place = core::rectf(pos, pos + core::vector2df{ 1.f, 1.f });
-				m_states.emplace(state.place.UpperLeftCorner, state);
-			}
-		}
+		State state;
+		state.place = core::rectf(
+			(f32)platform.platform.UpperLeftCorner.X, (f32)platform.platform.UpperLeftCorner.Y,
+			(f32)platform.platform.LowerRightCorner.X, (f32)platform.platform.LowerRightCorner.Y);
+		m_states.emplace(state.place.UpperLeftCorner, state);
 	}
 
 	const float straight_cost = 1.f;

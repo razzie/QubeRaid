@@ -250,6 +250,26 @@ void LevelGenerator::generate(const std::vector<Level::Island>& in_islands, cons
 	});
 }
 
+void LevelGenerator::generate(const std::vector<Level::GroundBlock>& in_blocks, std::vector<Level::GroundPlatform>& out_platforms) const
+{
+	for (auto& block : in_blocks)
+	{
+		if (block.box.MaxEdge.Y != 0)
+			continue;
+
+		core::dimension2di size(block.box.getExtent().X, block.box.getExtent().Z);
+		for (int x = 0; x < size.Width; ++x)
+		{
+			for (int y = 0; y < size.Height; ++y)
+			{
+				core::vector2di pos((x + block.box.MinEdge.X), (y + block.box.MinEdge.Z));
+				core::recti platform(pos, pos + core::vector2di{ 1, 1 });
+				out_platforms.push_back({ platform });
+			}
+		}
+	}
+}
+
 void LevelGenerator::optimize(std::vector<Level::Island>& islands) const
 {
 	if (islands.empty())

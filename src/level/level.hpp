@@ -46,12 +46,18 @@ public:
 		irr::video::SColor color = 0xffffffff;
 	};
 
+	struct GroundPlatform
+	{
+		irr::core::recti platform;
+	};
+
 	Level(QubeRaid*);
 	~Level();
 	const Pathfinder* getPathfinder() const;
 	const std::vector<Island>& getIslands() const;
 	const std::vector<Route>& getRoutes() const;
 	const std::vector<GroundBlock>& getGroundBlocks() const;
+	const std::vector<GroundPlatform>& getGroundPlatforms() const;
 
 private:
 	QubeRaid* m_app;
@@ -60,4 +66,5 @@ private:
 	std::vector<Island> m_islands;
 	std::vector<Route> m_routes;
 	std::vector<GroundBlock> m_ground_blocks;
+	std::vector<GroundPlatform> m_ground_platforms;
 };
