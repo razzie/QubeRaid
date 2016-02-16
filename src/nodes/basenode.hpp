@@ -10,12 +10,12 @@
 
 #include <irrlicht.h>
 
-class QubeRaid;
+class Application;
 
 class BaseNode : public irr::scene::ISceneNode
 {
 public:
-	BaseNode(QubeRaid*);
+	BaseNode(Application*);
 	virtual ~BaseNode();
 	virtual void OnRegisterSceneNode();
 	virtual void render();
@@ -25,7 +25,7 @@ public:
 	void setOutline(bool, irr::f32 thickness = 1.f, irr::f32 offset = 1.f, irr::video::SColor = 0xff000000);
 
 protected:
-	QubeRaid* m_app;
+	Application* m_app;
 	irr::scene::CVertexBuffer m_vertices;
 	irr::scene::CIndexBuffer m_indices;
 	irr::scene::CDynamicMeshBuffer m_meshbuffer;

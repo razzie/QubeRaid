@@ -11,12 +11,12 @@
 #include <cstdint>
 #include <irrlicht.h>
 
-class QubeRaid;
+class Application;
 
 class InputManager : public irr::IEventReceiver
 {
 public:
-	InputManager(QubeRaid*);
+	InputManager(Application*);
 	virtual ~InputManager();
 	virtual bool OnEvent(const irr::SEvent& event);
 	bool isLeftMouseBtnDown() const;
@@ -26,7 +26,7 @@ public:
 	bool isKeyDown(irr::EKEY_CODE) const;
 
 private:
-	QubeRaid* m_app;
+	Application* m_app;
 	bool m_keys[irr::KEY_KEY_CODES_COUNT];
 	bool m_mousebtn_left;
 	bool m_mousebtn_middle;

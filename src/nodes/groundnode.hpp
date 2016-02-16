@@ -13,12 +13,12 @@
 #include "nodes/basenode.hpp"
 #include "level/level.hpp" // Level::GroundBlock
 
-class QubeRaid;
+class Application;
 
 class GroundNode : public BaseNode
 {
 public:
-	GroundNode(QubeRaid*, const std::vector<Level::GroundBlock>& blocks);
+	GroundNode(Application*, const std::vector<Level::GroundBlock>& blocks);
 	virtual ~GroundNode();
 
 	static irr::f32 getHeight(irr::core::vector2df pos);

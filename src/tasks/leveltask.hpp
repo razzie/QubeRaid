@@ -12,14 +12,14 @@
 #include <irrlicht.h>
 #include <gg/thread.hpp>
 
-class QubeRaid;
+class Application;
 class GroundNode;
 class QuboidNode;
 
 class LevelTask : public gg::ITask
 {
 public:
-	LevelTask(QubeRaid*);
+	LevelTask(Application*);
 	virtual ~LevelTask();
 	virtual void onStart(gg::ITaskOptions&);
 	virtual void onEvent(gg::ITaskOptions&, gg::EventPtr);
@@ -29,7 +29,7 @@ public:
 	virtual void onFinish(gg::ITaskOptions&);
 
 private:
-	QubeRaid* m_app;
+	Application* m_app;
 	GroundNode* m_ground;
 	std::vector<QuboidNode*> m_quboids;
 

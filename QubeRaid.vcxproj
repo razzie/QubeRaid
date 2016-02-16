@@ -379,7 +379,7 @@
     <ClInclude Include="src\tasks\cameracontroller.hpp" />
     <ClInclude Include="src\utils\mousepointer.hpp" />
     <ClInclude Include="src\utils\perlin.hpp" />
-    <ClInclude Include="src\quberaid.hpp" />
+    <ClInclude Include="src\application.hpp" />
     <ClInclude Include="src\materials\shadercallback.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -400,7 +400,7 @@
     <ClCompile Include="src\nodes\groundnode.cpp" />
     <ClCompile Include="src\nodes\basenode.cpp" />
     <ClCompile Include="src\nodes\quboidnode.cpp" />
-    <ClCompile Include="src\quberaid.cpp" />
+    <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\tasks\leveltask.cpp" />
     <ClCompile Include="src\tasks\maintask.cpp" />
     <ClCompile Include="src\utils\inputmanager.cpp" />

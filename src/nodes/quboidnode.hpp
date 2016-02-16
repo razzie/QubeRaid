@@ -11,13 +11,13 @@
 #include <irrlicht.h>
 #include "nodes/basenode.hpp"
 
-class QubeRaid;
+class Application;
 class Level;
 
 class QuboidNode : public BaseNode
 {
 public:
-	QuboidNode(QubeRaid*);
+	QuboidNode(Application*);
 	virtual ~QuboidNode();
 	void walkTo(irr::core::vector2df pos);
 };

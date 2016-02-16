@@ -40,7 +40,7 @@ void main(void)
 )";
 
 
-FlatMaterial::FlatMaterial(QubeRaid* app) :
+FlatMaterial::FlatMaterial(Application* app) :
 	BaseMaterial(app, vs, ps)
 {
 }

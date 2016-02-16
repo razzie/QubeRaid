@@ -10,17 +10,17 @@
 
 #include <irrlicht.h>
 
-class QubeRaid;
+class Application;
 
 class MousePointer
 {
 public:
-	MousePointer(QubeRaid*);
+	MousePointer(Application*);
 	~MousePointer();
 	void render();
 
 private:
-	QubeRaid* m_app;
+	Application* m_app;
 	irr::core::vector2di m_mouse_back_pos;
 	irr::video::ITexture* m_texture;
 };

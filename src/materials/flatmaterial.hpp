@@ -13,5 +13,5 @@
 class FlatMaterial : public BaseMaterial
 {
 public:
-	FlatMaterial(QubeRaid*);
+	FlatMaterial(Application*);
 };

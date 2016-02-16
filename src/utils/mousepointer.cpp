@@ -7,7 +7,7 @@
  */
 
 #include <cmath>
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "utils/inputmanager.hpp"
 #include "utils/mousepointer.hpp"
 
@@ -146,7 +146,7 @@ static void drawImage(video::IVideoDriver* driver, const video::ITexture* textur
 }
 
 
-MousePointer::MousePointer(QubeRaid* app) :
+MousePointer::MousePointer(Application* app) :
 	m_app(app)
 {
 	io::IReadFile* f = app->getDevice()->getFileSystem()->createMemoryReadFile(mouse, sizeof(mouse), "mouse");

@@ -8,7 +8,7 @@
 
 #include <cmath>
 #include <gg/logger.hpp>
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "level/level.hpp"
 #include "events/inputevents.hpp"
 #include "tasks/leveltask.hpp"
@@ -21,7 +21,7 @@
 using namespace irr;
 
 
-LevelTask::LevelTask(QubeRaid* app) :
+LevelTask::LevelTask(Application* app) :
 	m_app(app)
 {
 	auto level = std::make_shared<Level>(m_app);
@@ -45,7 +45,7 @@ void LevelTask::onStart(gg::ITaskOptions& options)
 {
 	options.subscribe(key_event);
 	options.subscribe(mouse_event);
-	//options.getThread().addTask<CameraController, QubeRaid::State::GAME>(m_app);
+	//options.getThread().addTask<CameraController, Application::State::GAME>(m_app);
 }
 
 void LevelTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)

@@ -6,10 +6,10 @@
  * All rights reserved.
  */
 
-#include "quberaid.hpp"
+#include "application.hpp"
 
 int main(int argc, char** argv)
 {
-	QubeRaid app(argc, argv);
+	Application app(argc, argv);
 	return app.run();
 }

@@ -13,5 +13,5 @@
 class OutlineMaterial : public BaseMaterial
 {
 public:
-	OutlineMaterial(QubeRaid*);
+	OutlineMaterial(Application*);
 };

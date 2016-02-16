@@ -6,7 +6,7 @@
  * All rights reserved.
  */
 
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "level/level.hpp"
 #include "level/pathfinder.hpp"
 #include "nodes/quboidnode.hpp"
@@ -16,10 +16,10 @@
 using namespace irr;
 
 
-QuboidNode::QuboidNode(QubeRaid* app) :
+QuboidNode::QuboidNode(Application* app) :
 	BaseNode(app)
 {
-	setOutline(true, 0.75f, 0.05f, 0xff000000);
+	setOutline(true, 0.75f, 0.0f, 0xff000000);
 	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
 
 	RoundedCubeMesh().append(&m_meshbuffer, { -0.25f, 0.2f, -0.25f }, { 0.5f, 0.5f, 0.5f }, 0xffff6666);

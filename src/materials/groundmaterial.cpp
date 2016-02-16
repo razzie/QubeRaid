@@ -43,7 +43,7 @@ void main(void)
 )";
 
 
-GroundMaterial::GroundMaterial(QubeRaid* app) :
+GroundMaterial::GroundMaterial(Application* app) :
 	BaseMaterial(app, vs, ps)
 {
 }

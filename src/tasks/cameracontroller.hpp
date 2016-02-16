@@ -10,17 +10,17 @@
 
 #include <gg/thread.hpp>
 
-class QubeRaid;
+class Application;
 
 class CameraController : public gg::ITask
 {
 public:
-	CameraController(QubeRaid*);
+	CameraController(Application*);
 	virtual ~CameraController();
 	virtual void onStart(gg::ITaskOptions&);
 	virtual void onEvent(gg::ITaskOptions&, gg::EventPtr);
 	virtual void onUpdate(gg::ITaskOptions&);
 
 private:
-	QubeRaid* m_app;
+	Application* m_app;
 };

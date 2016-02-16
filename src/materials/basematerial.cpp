@@ -8,12 +8,12 @@
 
 #include "materials/basematerial.hpp"
 #include "materials/shadercallback.hpp"
-#include "quberaid.hpp"
+#include "application.hpp"
 
 using namespace irr;
 
 
-BaseMaterial::BaseMaterial(QubeRaid* app, const char* vs, const char* ps, video::IShaderConstantSetCallBack* shader_callback)
+BaseMaterial::BaseMaterial(Application* app, const char* vs, const char* ps, video::IShaderConstantSetCallBack* shader_callback)
 {
 	scene::ISceneManager* smgr = app->getSceneManager();
 	video::IGPUProgrammingServices* gpu = smgr->getVideoDriver()->getGPUProgrammingServices();

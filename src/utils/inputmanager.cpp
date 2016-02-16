@@ -9,7 +9,7 @@
 #include <irrlicht.h>
 #include "events/inputevents.hpp"
 #include "utils/inputmanager.hpp"
-#include "quberaid.hpp"
+#include "application.hpp"
 
 using namespace irr;
 
@@ -59,7 +59,7 @@ struct GUIActionEx : public GUIAction
 };
 
 
-InputManager::InputManager(QubeRaid* app) :
+InputManager::InputManager(Application* app) :
 	m_app(app),
 	m_last_mouse_x(0),
 	m_last_mouse_y(0)

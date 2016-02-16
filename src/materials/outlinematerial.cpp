@@ -8,7 +8,7 @@
 
 #include "materials/outlinematerial.hpp"
 #include "materials/shadercallback.hpp"
-#include "quberaid.hpp"
+#include "application.hpp"
 
 using namespace irr;
 
@@ -77,10 +77,11 @@ private:
 };
 
 
-OutlineMaterial::OutlineMaterial(QubeRaid* app) :
+OutlineMaterial::OutlineMaterial(Application* app) :
 	BaseMaterial(app, vs, ps, new OutlineShaderCallback(app->getSceneManager()))
 {
 	FrontfaceCulling = true;
 	BackfaceCulling = false;
 	//ZBuffer = video::ECFN_NEVER;
+	//ZWriteEnable = true;
 }

@@ -9,12 +9,12 @@
 #include "level/level.hpp"
 #include "level/levelgenerator.hpp"
 #include "level/pathfinder.hpp"
-#include "quberaid.hpp"
+#include "application.hpp"
 
 using namespace irr;
 
 
-Level::Level(QubeRaid* app) :
+Level::Level(Application* app) :
 	m_app(app)
 {
 	LevelGenerator gen(12345);

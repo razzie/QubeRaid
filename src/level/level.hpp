@@ -11,7 +11,7 @@
 #include <vector>
 #include <irrlicht.h>
 
-class QubeRaid;
+class Application;
 class Pathfinder;
 
 class Level
@@ -51,7 +51,7 @@ public:
 		irr::core::recti platform;
 	};
 
-	Level(QubeRaid*);
+	Level(Application*);
 	~Level();
 	const Pathfinder* getPathfinder() const;
 	const std::vector<Island>& getIslands() const;
@@ -60,7 +60,7 @@ public:
 	const std::vector<GroundPlatform>& getGroundPlatforms() const;
 
 private:
-	QubeRaid* m_app;
+	Application* m_app;
 	Pathfinder* m_pathfinder;
 	irr::core::dimension2du m_size;
 	std::vector<Island> m_islands;

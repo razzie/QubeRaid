@@ -7,7 +7,7 @@
  */
 
 #include <cmath>
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "nodes/groundnode.hpp"
 #include "meshes/cubemesh.hpp"
 #include "meshes/roundedcubemesh.hpp"
@@ -15,7 +15,7 @@
 using namespace irr;
 
 
-GroundNode::GroundNode(QubeRaid* app, const std::vector<Level::GroundBlock>& blocks) :
+GroundNode::GroundNode(Application* app, const std::vector<Level::GroundBlock>& blocks) :
 	BaseNode(app)
 {
 	setOutline(true);

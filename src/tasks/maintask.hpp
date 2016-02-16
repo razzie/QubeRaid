@@ -11,12 +11,12 @@
 #include <gg/thread.hpp>
 #include "utils/mousepointer.hpp"
 
-class QubeRaid;
+class Application;
 
 class MainTask : public gg::ITask
 {
 public:
-	MainTask(QubeRaid*);
+	MainTask(Application*);
 	virtual ~MainTask();
 	virtual void onStart(gg::ITaskOptions&);
 	virtual void onEvent(gg::ITaskOptions&, gg::EventPtr);
@@ -26,7 +26,7 @@ public:
 	virtual void onFinish(gg::ITaskOptions&);
 
 private:
-	QubeRaid* m_app;
+	Application* m_app;
 	irr::IrrlichtDevice* m_device;
 	irr::video::IVideoDriver* m_driver;
 	irr::scene::ISceneManager* m_smgr;

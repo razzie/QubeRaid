@@ -8,7 +8,7 @@
 
 #include <gg/logger.hpp>
 #include <irrlicht.h>
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "events/inputevents.hpp"
 #include "tasks/cameracontroller.hpp"
 #include "tasks/maintask.hpp"
@@ -40,7 +40,7 @@ static void takeScreenshot(irr::IrrlichtDevice* device)
 }
 
 
-MainTask::MainTask(QubeRaid* app) :
+MainTask::MainTask(Application* app) :
 	m_app(app),
 	m_device(m_app->getDevice()),
 	m_driver(m_app->getDriver()),

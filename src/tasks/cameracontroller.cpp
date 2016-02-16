@@ -7,7 +7,7 @@
  */
 
 #include <irrlicht.h>
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "events/inputevents.hpp"
 #include "tasks/cameracontroller.hpp"
 
@@ -33,7 +33,7 @@ static void rotateVectorAroundAxis(core::vector3df& vector, const core::vector3d
 }
 
 
-CameraController::CameraController(QubeRaid* app) :
+CameraController::CameraController(Application* app) :
 	m_app(app)
 {
 }

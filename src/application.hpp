@@ -38,7 +38,7 @@ std::shared_ptr<T> makeIrrPtr(T* p)
 class InputManager;
 class Level;
 
-class QubeRaid
+class Application
 {
 public:
 	enum State : uint16_t
@@ -47,8 +47,8 @@ public:
 		GAME
 	};
 
-	QubeRaid(int argc, char** argv);
-	QubeRaid();
+	Application(int argc, char** argv);
+	Application();
 	int run();
 	irr::IrrlichtDevice* getDevice();
 	irr::video::IVideoDriver* getDriver();

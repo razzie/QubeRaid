@@ -13,5 +13,5 @@
 class GroundMaterial : public BaseMaterial
 {
 public:
-	GroundMaterial(QubeRaid*);
+	GroundMaterial(Application*);
 };

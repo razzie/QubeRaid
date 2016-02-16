@@ -6,13 +6,13 @@
  * All rights reserved.
  */
 
-#include "quberaid.hpp"
+#include "application.hpp"
 #include "level/level.hpp"
 #include "nodes/basenode.hpp"
 
 using namespace irr;
 
-BaseNode::BaseNode(QubeRaid* app) :
+BaseNode::BaseNode(Application* app) :
 	scene::ISceneNode(app->getSceneManager()->getRootSceneNode(), app->getSceneManager()),
 	m_app(app),
 	m_vertices(video::EVT_STANDARD),

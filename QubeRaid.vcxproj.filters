@@ -612,9 +612,6 @@
     <ClInclude Include="src\3rd\gg\version.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\quberaid.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\utils\perlin.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -780,12 +777,12 @@
     <ClInclude Include="src\3rd\randomlib\UniformInteger.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\application.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quberaid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\tasks\cameracontroller.cpp">
@@ -849,6 +846,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\3rd\randomlib\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
