@@ -20,7 +20,7 @@ QuboidNode::QuboidNode(Application* app) :
 	BaseNode(app)
 {
 	setOutline(true, 0.75f, 0.0f, 0xff000000);
-	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
+	m_material = *app->getResources()->get<video::SMaterial>("material_cell");
 
 	RoundedCubeMesh().append(&m_meshbuffer, { -0.25f, 0.2f, -0.25f }, { 0.5f, 0.5f, 0.5f }, 0xffff6666);
 

@@ -19,7 +19,7 @@ GroundNode::GroundNode(Application* app, const std::vector<Level::GroundBlock>& 
 	BaseNode(app)
 {
 	setOutline(true);
-	m_material = *app->getResources()->get<video::SMaterial>("material_ground");
+	m_material = *app->getResources()->get<video::SMaterial>("material_cell");
 
 	for (auto& block : blocks)
 	{

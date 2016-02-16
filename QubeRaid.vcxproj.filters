@@ -654,9 +654,6 @@
     <ClInclude Include="src\materials\basematerial.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\materials\groundmaterial.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\materials\outlinematerial.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -780,6 +777,9 @@
     <ClInclude Include="src\application.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\materials\cellmaterial.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -810,9 +810,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\materials\basematerial.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\materials\groundmaterial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\materials\outlinematerial.cpp">
@@ -849,6 +846,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\materials\cellmaterial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

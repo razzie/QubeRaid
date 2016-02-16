@@ -362,7 +362,7 @@
     <ClInclude Include="src\level\pathfinder.hpp" />
     <ClInclude Include="src\materials\basematerial.hpp" />
     <ClInclude Include="src\materials\flatmaterial.hpp" />
-    <ClInclude Include="src\materials\groundmaterial.hpp" />
+    <ClInclude Include="src\materials\cellmaterial.hpp" />
     <ClInclude Include="src\materials\linematerial.hpp" />
     <ClInclude Include="src\materials\outlinematerial.hpp" />
     <ClInclude Include="src\meshes\cubemesh.hpp" />
@@ -392,7 +392,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\materials\basematerial.cpp" />
     <ClCompile Include="src\materials\flatmaterial.cpp" />
-    <ClCompile Include="src\materials\groundmaterial.cpp" />
+    <ClCompile Include="src\materials\cellmaterial.cpp" />
     <ClCompile Include="src\materials\outlinematerial.cpp" />
     <ClCompile Include="src\materials\shadercallback.cpp" />
     <ClCompile Include="src\meshes\basemesh.cpp" />

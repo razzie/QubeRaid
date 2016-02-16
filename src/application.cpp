@@ -110,18 +110,18 @@ void Application::setLevel(std::shared_ptr<Level> level)
 /** --- RESOURCES --- */
 
 #include "materials/linematerial.hpp"
-#include "materials/flatmaterial.hpp"
 #include "materials/outlinematerial.hpp"
-#include "materials/groundmaterial.hpp"
+#include "materials/flatmaterial.hpp"
+#include "materials/cellmaterial.hpp"
 #include "meshes/cubemesh.hpp"
 #include "meshes/roundedcubemesh.hpp"
 
 void Application::initResources()
 {
 	m_resources->add<LineMaterial>("material_line");
-	m_resources->add<FlatMaterial>("material_flat", this);
 	m_resources->add<OutlineMaterial>("material_outline", this);
-	m_resources->add<GroundMaterial>("material_ground", this);
+	m_resources->add<FlatMaterial>("material_flat", this);
+	m_resources->add<CellMaterial>("material_cell", this);
 
 	m_resources->add<CubeMesh>("mesh_cube");
 	m_resources->add<RoundedCubeMesh>("mesh_roundedcube");

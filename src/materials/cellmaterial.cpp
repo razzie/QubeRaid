@@ -6,7 +6,7 @@
  * All rights reserved.
  */
 
-#include "materials/groundmaterial.hpp"
+#include "materials/cellmaterial.hpp"
 
 using namespace irr;
 
@@ -43,7 +43,7 @@ void main(void)
 )";
 
 
-GroundMaterial::GroundMaterial(Application* app) :
+CellMaterial::CellMaterial(Application* app) :
 	BaseMaterial(app, vs, ps)
 {
 }

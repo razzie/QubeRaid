@@ -10,8 +10,8 @@
 
 #include "materials/basematerial.hpp"
 
-class GroundMaterial : public BaseMaterial
+class CellMaterial : public BaseMaterial
 {
 public:
-	GroundMaterial(Application*);
+	CellMaterial(Application*);
 };
