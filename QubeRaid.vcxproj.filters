@@ -780,6 +780,9 @@
     <ClInclude Include="src\materials\cellmaterial.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\nodes\terrainnode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -849,6 +852,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\materials\cellmaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nodes\terrainnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

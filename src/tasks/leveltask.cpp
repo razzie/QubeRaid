@@ -13,8 +13,9 @@
 #include "events/inputevents.hpp"
 #include "tasks/leveltask.hpp"
 #include "tasks/cameracontroller.hpp"
-#include "nodes/groundnode.hpp"
-#include "nodes/quboidnode.hpp"
+//#include "nodes/groundnode.hpp"
+#include "nodes/terrainnode.hpp"
+//#include "nodes/quboidnode.hpp"
 #include "utils/perlin.hpp"
 #include "utils/grid.hpp"
 
@@ -24,21 +25,25 @@ using namespace irr;
 LevelTask::LevelTask(Application* app) :
 	m_app(app)
 {
-	auto level = std::make_shared<Level>(m_app);
-	m_app->setLevel(level);
+	//auto level = std::make_shared<Level>(m_app);
+	//m_app->setLevel(level);
 
-	m_ground = new GroundNode(m_app, level->getGroundBlocks());
+	//m_ground = new GroundNode(m_app, level->getGroundBlocks());
+	//resetCamera();
+
+	//m_quboids.push_back(new QuboidNode(m_app));
+	//auto pos = level->getIslands()[0].position;
+	//pos.X += 2.f;
+	//m_quboids[0]->setPosition({ pos.X, m_ground->getHeight(pos), pos.Y });
+
+	m_terrain = new TerrainNode(app, 12345, 32);
 	resetCamera();
-
-	m_quboids.push_back(new QuboidNode(m_app));
-	auto pos = level->getIslands()[0].position;
-	pos.X += 2.f;
-	m_quboids[0]->setPosition({ pos.X, m_ground->getHeight(pos), pos.Y });
 }
 
 LevelTask::~LevelTask()
 {
-	m_ground->drop();
+	//m_ground->drop();
+	m_terrain->drop();
 }
 
 void LevelTask::onStart(gg::ITaskOptions& options)
@@ -83,7 +88,7 @@ void LevelTask::onEvent(gg::ITaskOptions& options, gg::EventPtr e)
 			core::line3df ray = m_app->getSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates({ event->x, event->y });
 			if (plane.getIntersectionWithLine(ray.start, ray.end + ray.start, intersection))
 			{
-				m_quboids[0]->walkTo({ intersection.X, intersection.Z });
+				//m_quboids[0]->walkTo({ intersection.X, intersection.Z });
 			}
 		}
 	}
@@ -111,7 +116,7 @@ void LevelTask::onFinish(gg::ITaskOptions& options)
 
 void LevelTask::resetCamera()
 {
-	auto ground_center = m_ground->getBoundingBox().getCenter();
-	m_app->getCamera()->setPosition(ground_center + core::vector3df{ 0.f, 10.f, -10.f });
-	m_app->getCamera()->setTarget(ground_center);
+	auto center = /*m_ground*/m_terrain->getBoundingBox().getCenter();
+	m_app->getCamera()->setPosition(center + core::vector3df{ 0.f, 10.f, -10.f });
+	m_app->getCamera()->setTarget(center);
 }

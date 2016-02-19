@@ -372,6 +372,7 @@
     <ClInclude Include="src\nodes\groundnode.hpp" />
     <ClInclude Include="src\nodes\basenode.hpp" />
     <ClInclude Include="src\nodes\quboidnode.hpp" />
+    <ClInclude Include="src\nodes\terrainnode.hpp" />
     <ClInclude Include="src\tasks\leveltask.hpp" />
     <ClInclude Include="src\tasks\maintask.hpp" />
     <ClInclude Include="src\utils\inputmanager.hpp" />
@@ -401,6 +402,7 @@
     <ClCompile Include="src\nodes\basenode.cpp" />
     <ClCompile Include="src\nodes\quboidnode.cpp" />
     <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\nodes\terrainnode.cpp" />
     <ClCompile Include="src\tasks\leveltask.cpp" />
     <ClCompile Include="src\tasks\maintask.cpp" />
     <ClCompile Include="src\utils\inputmanager.cpp" />

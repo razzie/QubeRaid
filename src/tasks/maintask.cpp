@@ -96,15 +96,15 @@ void MainTask::onUpdate(gg::ITaskOptions& options)
 		//m_driver->beginScene(true, true, { 255, 128, 196, 255 });
 		//m_driver->beginScene(true, true, { 255, 196, 196, 196 });
 		//m_driver->beginScene(true, true, { 255, 64, 64, 64 });
-		//m_driver->beginScene(true, true, { 255, 255, 255, 255 });
-		m_driver->beginScene(true, true, { 255, 255, 196, 128 });
+		m_driver->beginScene(true, true, { 255, 255, 255, 255 });
+		//m_driver->beginScene(true, true, { 255, 255, 196, 128 });
 		m_smgr->drawAll();
 
-		//m_driver->setMaterial(LineMaterial());
-		//m_driver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
-		//m_driver->draw3DLine({ 0.f,0.f,0.f }, { 1.f,0.f,0.f }, 0xffff0000);
-		//m_driver->draw3DLine({ 0.f,0.f,0.f }, { 0.f,1.f,0.f }, 0xff00ff00);
-		//m_driver->draw3DLine({ 0.f,0.f,0.f }, { 0.f,0.f,1.f }, 0xff0000ff);
+		m_driver->setMaterial(LineMaterial());
+		m_driver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
+		m_driver->draw3DLine({ 0.f,0.f,0.f }, { 1.f,0.f,0.f }, 0xffff0000);
+		m_driver->draw3DLine({ 0.f,0.f,0.f }, { 0.f,1.f,0.f }, 0xff00ff00);
+		m_driver->draw3DLine({ 0.f,0.f,0.f }, { 0.f,0.f,1.f }, 0xff0000ff);
 
 		m_mouse.render();
 

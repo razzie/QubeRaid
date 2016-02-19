@@ -13,8 +13,9 @@
 #include <gg/thread.hpp>
 
 class Application;
-class GroundNode;
-class QuboidNode;
+//class GroundNode;
+class TerrainNode;
+//class QuboidNode;
 
 class LevelTask : public gg::ITask
 {
@@ -30,8 +31,9 @@ public:
 
 private:
 	Application* m_app;
-	GroundNode* m_ground;
-	std::vector<QuboidNode*> m_quboids;
+	//GroundNode* m_ground;
+	//std::vector<QuboidNode*> m_quboids;
+	TerrainNode* m_terrain;
 
 	void resetCamera();
 };
