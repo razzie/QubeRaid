@@ -36,7 +36,7 @@ LevelTask::LevelTask(Application* app) :
 	//pos.X += 2.f;
 	//m_quboids[0]->setPosition({ pos.X, m_ground->getHeight(pos), pos.Y });
 
-	m_terrain = new TerrainNode(app, 12345, 32);
+	m_terrain = new TerrainNode(app, 12345, 64);
 	resetCamera();
 }
 

@@ -378,6 +378,7 @@
     <ClInclude Include="src\utils\inputmanager.hpp" />
     <ClInclude Include="src\utils\grid.hpp" />
     <ClInclude Include="src\tasks\cameracontroller.hpp" />
+    <ClInclude Include="src\utils\marchingcubes.hpp" />
     <ClInclude Include="src\utils\mousepointer.hpp" />
     <ClInclude Include="src\utils\perlin.hpp" />
     <ClInclude Include="src\application.hpp" />
@@ -407,6 +408,7 @@
     <ClCompile Include="src\tasks\maintask.cpp" />
     <ClCompile Include="src\utils\inputmanager.cpp" />
     <ClCompile Include="src\tasks\cameracontroller.cpp" />
+    <ClCompile Include="src\utils\marchingcubes.cpp" />
     <ClCompile Include="src\utils\mousepointer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

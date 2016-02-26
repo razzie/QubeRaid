@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <functional>
+
 template<class T>
 class Grid3D
 {
@@ -49,9 +51,21 @@ public:
 		return &m_grid[(x * m_height * m_depth) + (y * m_depth) + z];
 	}
 
-	// void(*f)(T*, int x, int y, int z)
-	template<class F>
-	void foreach(F f)
+	void foreach(std::function<void(T*,int,int,int)> f)
+	{
+		for (size_t x = 0; x < m_width; ++x)
+		{
+			for (size_t y = 0; y < m_height; ++y)
+			{
+				for (size_t z = 0; z < m_depth; ++z)
+				{
+					f((*this)(x, y, z), x, y, z);
+				}
+			}
+		}
+	}
+
+	void foreach(std::function<void(const T*, int, int, int)> f) const
 	{
 		for (size_t x = 0; x < m_width; ++x)
 		{
