@@ -416,8 +416,13 @@ void MarchingCubes::addCell(const Cell& cell, irr::scene::IDynamicMeshBuffer* bu
 		triangle.pointB = vertlist[tri_table[cubeindex][i + 1]];
 		triangle.pointC = vertlist[tri_table[cubeindex][i + 2]];
 		core::vector3df normal = triangle.getNormal();
-		video::SColor color = 0xff66ff66;
+		video::SColor color;// = 0xff66ff66;
 		int tmp_index;
+
+		int height = cell.pos[0].Y;
+		if (height == 0) color = 0xff000000;
+		else if (height == 1) color = 0xff66ff66;
+		else color = 0xffaa6633;
 
 		if (weld && (tmp_index = findVertex(triangle.pointA, buf)) != -1)
 		{
