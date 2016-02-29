@@ -427,6 +427,7 @@ void MarchingCubes::addCell(const Cell& cell, irr::scene::IDynamicMeshBuffer* bu
 		if (weld && (tmp_index = findVertex(triangle.pointA, buf)) != -1)
 		{
 			vertices[tmp_index].Normal += normal;
+			vertices[tmp_index].Color = color;
 			indices.push_back(tmp_index);
 		}
 		else
@@ -439,6 +440,7 @@ void MarchingCubes::addCell(const Cell& cell, irr::scene::IDynamicMeshBuffer* bu
 		if (weld && (tmp_index = findVertex(triangle.pointB, buf)) != -1)
 		{
 			vertices[tmp_index].Normal += normal;
+			vertices[tmp_index].Color = color;
 			indices.push_back(tmp_index);
 		}
 		else
@@ -451,6 +453,7 @@ void MarchingCubes::addCell(const Cell& cell, irr::scene::IDynamicMeshBuffer* bu
 		if (weld && (tmp_index = findVertex(triangle.pointC, buf)) != -1)
 		{
 			vertices[tmp_index].Normal += normal;
+			vertices[tmp_index].Color = color;
 			indices.push_back(tmp_index);
 		}
 		else

@@ -17,7 +17,7 @@ class Application;
 class TerrainNode : public BaseNode
 {
 public:
-	TerrainNode(Application*, uint32_t seed, uint32_t size);
+	TerrainNode(Application*, uint32_t seed, irr::core::dimension2du size);
 	virtual ~TerrainNode();
 
 private:
